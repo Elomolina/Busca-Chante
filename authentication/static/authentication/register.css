@@ -1,0 +1,61 @@
+form 
+{
+    margin-top: 0.5em;
+    width: 70%;
+}
+section > h3 
+{
+    margin-top: 1em;
+}
+.flechita input[type="image"]
+{
+    height: 30px;
+    width: 30px;
+}
+form h3 
+{
+    margin: 0;
+}
+input[type="image"]
+{
+    border: none;
+}
+#inicia-div 
+{
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+#form-content h4 
+{
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+}
+.inputs-div 
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.correo h3 
+{
+    margin-bottom: 0.5em;
+}
+.flechita 
+{
+    margin-top: 1em;
+    width: 100%;
+    display:  flex;
+    justify-content: space-between;
+}
+.close 
+{
+    visibility: hidden;
+    height: 0px;
+    display: none;
+}
+.open 
+{
+    visibility: visible;
+    height: auto;
+}

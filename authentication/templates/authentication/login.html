@@ -1,0 +1,29 @@
+{% extends 'authentication/layout.html' %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'authentication/login.css'%}">
+{% endblock %}
+{% block main %}
+<section>
+    <h3>Encuentra el lugar perfecto para ti o publica ese espacio que quieres rentar.  <br> Con <span class="name">Busca
+        Chante</span>, el hogar ideal está a solo un clic de distancia.</h3>
+    <form>
+        <div id="inicia-div">
+            <h4>
+                Iniciar sesión o <a href="{% url 'register' %}">regístrate</a>
+            </h4>
+        </div>
+        <div id="form-content">
+            <h4>Te damos la bienvenida al <span class="name">Busca Chante</span></h4>
+            <div class="inputs">
+                <input id="user_mail" type="text" placeholder="Ingresa tu username o correo">
+                <input id="pass" type="password" placeholder="Ingresa tu contraseña">
+                <input type="submit" value="Inicia Sesión" id="logIn">
+            </div>
+        </div>
+    </form>
+</section>
+{% endblock %}
+{% block script %}
+<script src="{% static 'authentication/login.js'%}"></script>
+{% endblock %}

@@ -1,0 +1,75 @@
+section 
+{
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+section h3 
+{
+    text-align: center;
+    width: 90%;
+    line-height: 2em;
+}
+.name 
+{
+    font-family: "Coiny", system-ui;
+    color: #B03052;
+}
+form h4 
+{
+    margin: 0;
+}
+form 
+{
+    width: 70%;
+    padding: 2em;
+    padding-top: 1em;
+    border: 2px solid #B03052;
+    border-radius: 20px;
+
+}
+#inicia-div 
+{
+    text-align: center;
+    padding-bottom: 0.5em;
+    border-bottom: 2px solid grey;
+    width: 100%;
+}
+#form-content 
+{
+    margin-top: 1em;
+}
+#form-content h4 
+{
+    font-weight: 400;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 0.5em;
+}
+.inputs 
+{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    align-items: center;
+}
+.inputs input
+{
+    width: 80%;
+    height: 50px;
+    border: 2px solid #B03052;
+    border-radius: 10px;
+    text-align: center;
+}
+.inputs input[type="submit"]
+{
+    background-color: #B03052;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    transition: 1s;
+}
+.inputs input[type="submit"]:hover 
+{
+    transform: scale(1.05);
+}

@@ -1,0 +1,62 @@
+{% extends 'authentication/layout.html' %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'authentication/login.css'%}">
+<link rel="stylesheet" href="{% static 'authentication/register.css'%}">
+{% endblock %}
+{% block main %}
+<section>
+    <h3>Encuentra el lugar perfecto para ti o publica ese espacio que quieres rentar. <br>Con <span class="name">Busca
+            Chante</span>, el hogar ideal está a solo 
+            un clic de distancia.</h3>
+    <form>
+        <div id="inicia-div">
+            <h4>
+                <a href="{% url 'login'%}">Iniciar sesión</a> o regístrate
+            </h4>
+        </div>
+        <div id="form-content">
+            <h4>Te damos la bienvenida al <span class="name">Busca Chante</span></h4>
+            <div class="inputs">
+                <div class="correo open inputs-div">
+                    <h3>Empecemos registrando tu correo ✉️</h3>
+                    <input type="text" id="correo" placeholder="Ingresa tu correo">
+                </div>
+                <div class="telefono close inputs-div">
+                    <h3>Ingresa tu número de teléfono 📱</h3>
+                    <input type="number" id="telefono" placeholder="Teléfono">
+                </div>
+                <div class="info close inputs-div">
+                    <h3>Ingresa tu nombre y apellido</h3>
+                    <input type="text" id="nombre" placeholder="Nombre">
+                    <br>
+                    <input type="text" id="apellido" placeholder="Apellido">
+                </div>
+                <div class="username close inputs-div">
+                    <h3>Escoge un username 🦔</h3>
+                    <input type="text" id="username" placeholder="Username">
+                </div>
+                <div class="password close inputs-div">
+                    <h3>Ingresa una contraseña <br> <span style="font-size: 0.9rem; font-weight: 400;">Asegúrate que tenga más de 8 caracteres y contenga por lo menos un símbolo 😎</span></h3>
+                    <input type="password" id="password" placeholder="Contraseña">
+                </div>
+                <div class="confirmation close inputs-div">
+                    <h3>Confirma tu contraseña</h3>
+                    <input type="password" id="confirmation" placeholder="Confirmacion contraseña">
+                </div>
+                <div class="send close inputs-div">
+                    <h3 class="name">Busca Chante</h3>
+                    <input type="submit" id="register-button" value="Registrarse">
+                </div>
+                <div class="flechita">
+                    <input id="back" class="arrows" type="image" src="{% static 'authentication/back.png'%}" alt="">
+                    <input id="next" class="arrows" type="image" src="{% static 'authentication/angulo-de-flecha-derecha.png'%}" alt="">
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+{% endblock %}
+{% block script %}
+<script src="{% static 'authentication/register.js'%}"></script>
+{% endblock %}

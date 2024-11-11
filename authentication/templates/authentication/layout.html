@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="{% static 'authentication/logo_BC.png'%}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'authentication/auth.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Coiny&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    {% block style %}
+    {% endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>layout</title>
+</head>
+
+<body>
+    <nav>
+        <div>
+            <img id="logo" src="{% static 'authentication/logo_BC.png'%}" alt="">
+            <h1>Busca Chante</h1>
+        </div>
+        <div class="nav-div">
+            <img id="menu-logo" src="{% static 'authentication/menu.png'%}" alt="">
+            <img id="user" src="{% static 'authentication/avatar-de-hombre.png'%}" alt="">
+        </div>
+        <div class="popUp">
+            <div>
+                <h5>
+                    <a href="{% url 'register'%}">
+                        Registrate
+                    </a>
+                </h5>
+                <h5>
+                    <a href="{% url 'login'%}">
+                        Inicia Sesión
+                    </a>
+                </h5>
+            </div>
+        </div>
+    </nav>
+    <main>
+        {% block main %}
+        {% endblock %}
+    </main>
+    <footer>
+        <h5>© 2024 Busca Chante, inc.</h5>
+        <h4>Elaborado por Elo Moca <3< /h4>
+                <div class="socials">
+                    <img src="{% static 'authentication/github.png'%}" alt="">
+                    <img src="{% static 'authentication/gmail.png'%}" alt="">
+                    <img src="{% static 'authentication/logotipo-de-instagram.png'%}" alt="">
+                    <img src="{% static 'authentication/logotipo-de-linkedin.png'%}" alt="">
+                </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'authentication/auth.js'%}"></script>
+    {% block script %}
+    {% endblock %}
+</body>
+
+</html>

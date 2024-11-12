@@ -1,0 +1,26 @@
+{% extends 'layout.html '%}
+{% load static %}
+
+{% block style %}
+<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"  rel="stylesheet"/>
+<link rel="stylesheet" href="{% static 'post/create.css' %}">
+{% endblock %}
+
+{% block main %}
+<h2>Agrega tu primera publicación en <span>Busca Chante</span></h2>
+<p>Ya sea si estás buscando un espacio o bien si quieres poner en renta 😎</p>
+<p>Otros usuarios podrán ver tu publicación así que se específico con lo que buscas o con la habitación, cuarto, casa o apartamento que pondrás en renta 🏠</p>
+<hr>
+<form action="">
+    <h3>¿Estás buscando en rentar o poner en renta?</h3>
+    <div>
+        <select id="opciones" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option>Busco rentar un espacio</option>
+          <option>Quiero poner en renta un espacio</option>
+        </select>  
+        <input type="submit" value="Continuar" id="crearPostBoton">
+    </div>
+</form>
+{% endblock %}
+{% block script %}
+{% endblock %}

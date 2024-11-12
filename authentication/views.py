@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.http import JsonResponse
 import json
 from .models import *
@@ -61,3 +61,10 @@ class Register(View):
             except IntegrityError:
                 return JsonResponse({"error": "Este usuario ya existe 🦔"})
         return JsonResponse({"success": "Bienvenido al Busca Chante 🤠", "path": "/"})
+    
+@method_decorator(csrf_exempt, name = 'dispatch')
+class LogOut(View):
+    def post(self, request):
+        print('a')
+        logout(request)
+        return redirect(reverse("login"))

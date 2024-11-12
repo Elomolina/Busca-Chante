@@ -1,0 +1,13 @@
+{% extends 'layout.html'%}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'post/index.css'%}">
+{% endblock %}
+{% block main %}
+<form action="" id="search">
+    <input type="text" placeholder="Busca según ubicación, tipo de habitación o precio">
+</form>
+<a href="{% url 'create_post' %}">
+    <img src="{% static 'post/mas.png'%}" alt="" srcset="" id="mas">
+</a>
+{% endblock %}

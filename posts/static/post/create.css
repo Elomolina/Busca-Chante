@@ -1,0 +1,55 @@
+span 
+{
+    font-family: "Coiny", system-ui;
+    color: #B03052;
+}
+main 
+{
+    margin-left: 1.5em;
+}
+h2 
+{
+    margin-bottom: 1.5em;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+p
+{
+    line-height: 2em;
+    margin-bottom: 1em;
+}
+form 
+{
+    margin-top: 1.5em;
+}
+#opciones 
+{
+    width: 60%;
+}
+form h3 
+{
+    margin-bottom: 1em;
+}
+form div 
+{
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+#crearPostBoton 
+{
+    background-color: #B03052;
+    color: white;
+    padding: 1em;
+    border-radius: 10px;
+    margin-top: 1em;
+    position: relative;
+    bottom: 8px;
+    transition: 0.5s;
+}
+#crearPostBoton:hover 
+{
+    background-color: #FEE5EA;
+    color: #B03052;
+    font-weight: bold;
+}

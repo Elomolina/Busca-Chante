@@ -3,11 +3,13 @@ html, body
     font-family: "poppins", sans-serif;
     height: 100%;
 }
+
 body 
 {
     display: grid;
     margin:0;
     background-color: white;
+    grid-template-rows: min-content 1fr min-content;
 }
 nav 
 {
@@ -118,12 +120,16 @@ footer h5, footer h4
     background-color: #B03052;
     box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2);
 }
-.popUp div h5 
+.popUp div a 
 {
     cursor: pointer;
-    transition: 0.5s;
+    transition: 1s;
+    padding: 0.5em;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
 }
-.popUp div h5:hover
+.popUp div a:hover
 {
     background-color: white;
     color: #B03052;
@@ -132,19 +138,57 @@ footer h5, footer h4
     border-radius: 10px;
     text-align: center;
 }
+
+.popUp form input 
+{
+    font-family: 'poppins', sans-serif;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: 1s;
+}
+.popUp form input:hover 
+{
+    background-color: white;
+    color: #B03052;
+    width: 100%;
+    padding: 1em;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.popUp div a, .popUp div form input
+{
+    font-size: 0.8rem;
+}
 .show 
 {
     display: block;
 }
-.popUp a 
+#search 
 {
-    color: white;
-    text-decoration: none;
-    padding: 1em;
-    padding-left: 1.5em;
-    padding-right: 1.5em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
-.popUp a:hover 
+#search input 
 {
-    color:#B03052
+    width: 70%;
+    padding: 1.5em;
+    border-radius: 10px;
+    background-color: rgb(227, 225, 225);
+    border: 1px solid rgb(227, 225, 225);
+    font-weight: bold;
+    outline: none;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0,0,0.2);
+    text-align: center;
+}
+#logo-link 
+{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

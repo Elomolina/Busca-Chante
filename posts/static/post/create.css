@@ -26,11 +26,11 @@ form
 {
     width: 60%;
 }
-form h3 
+form > h3 
 {
     margin-bottom: 1em;
 }
-form div 
+form > div 
 {
     display: flex;
     gap: 1em;
@@ -52,4 +52,86 @@ form div
     background-color: #FEE5EA;
     color: #B03052;
     font-weight: bold;
+}
+#buscar 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+    margin: 1em;
+    margin-top: 2em;
+}
+#ponerRenta, .buscarBC 
+{
+    display: none;
+}
+#buscar section 
+{
+    display: flex;
+    justify-content: center;
+}
+#rangoPrecio 
+{
+    border-top: 1px solid rgb(195, 195, 195);
+    padding-top: 1.5em;
+    flex-direction: column;
+}
+#rangoPrecio span 
+{
+    font-weight: 400;
+}
+.modalContent
+{
+    height: 100%;
+}
+#minmax-range 
+{
+    margin-top: 1em;
+}
+.rango 
+{
+    display: flex;
+    justify-content: space-between;
+}
+#rangoh4
+{
+    font-weight: bold;
+}
+#descripcionSection 
+{
+    margin-left: 1em;
+}
+#descripcionSection textarea 
+{
+    width: 90%;
+    margin-bottom: 1em;
+}
+#descripcionSection h3 
+{
+    margin-bottom: 1em;
+}
+#ubicacion 
+{
+    width: 90%;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
+.buttonBC
+{
+    display: flex;
+    justify-content: center;
+}
+#buscarChanteButton 
+{
+    background-color: #B03052;
+    color: white;
+    padding: 1em;
+    border-radius: 10px;
+    margin-bottom: 1em;
+    transition: 0.5s;
+}
+#buscarChanteButton:hover 
+{
+    transform: scale(1.05);
 }

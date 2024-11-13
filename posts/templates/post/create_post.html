@@ -2,25 +2,97 @@
 {% load static %}
 
 {% block style %}
-<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"  rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{% static 'post/create.css' %}">
 {% endblock %}
 
 {% block main %}
 <h2>Agrega tu primera publicación en <span>Busca Chante</span></h2>
 <p>Ya sea si estás buscando un espacio o bien si quieres poner en renta 😎</p>
-<p>Otros usuarios podrán ver tu publicación así que se específico con lo que buscas o con la habitación, cuarto, casa o apartamento que pondrás en renta 🏠</p>
+<p>Otros usuarios podrán ver tu publicación así que se específico con lo que buscas o con la habitación, cuarto, casa o
+  apartamento que pondrás en renta 🏠</p>
 <hr>
-<form action="">
-    <h3>¿Estás buscando en rentar o poner en renta?</h3>
-    <div>
-        <select id="opciones" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          <option>Busco rentar un espacio</option>
-          <option>Quiero poner en renta un espacio</option>
-        </select>  
-        <input type="submit" value="Continuar" id="crearPostBoton">
+<form action="" id="postForm">
+  <h3>¿Estás buscando en rentar o poner en renta?</h3>
+  <div>
+    <select id="opciones"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <option>Busco rentar un espacio</option>
+      <option>Quiero poner en renta un espacio</option>
+    </select>
+    <input data-modal-target="static-modal" data-modal-toggle="static-modal" type="submit" value="Continuar"
+      id="crearPostBoton">
+    <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
+      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div class="relative p-4 w-full max-w-2xl max-h-full modal">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 modalContent">
+          <!-- Modal header -->
+          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+              <span>
+                Busca Chante
+              </span>
+            </h3>
+            <button type="button"
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              data-modal-hide="static-modal">
+              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+          <div class="buscarBC" id="buscarBC">
+            <!-- contenido modal -->
+            <div class="buscar" id="buscar">
+              <section>
+                <h3>Selecciona que tipo de espacio buscas:</h3>
+                <select id="opciones"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option>Casa Completa</option>
+                  <option>Apartamento Completo</option>
+                  <option>Habitación Privada</option>
+                  <option>Habitación Compartida</option>
+                  <option>Casa Compartida</option>
+                  <option>Apartamento Compartido</option>
+                </select>
+              </section>
+              <section id="rangoPrecio">
+                <h3>Escoge el rango de precio según tu presupesto mensual (C$)</h3>
+                <input id="minmax-range" type="range" min="0" max="50000" step="100" value="0" class="w-full h-4 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+                <div class="rango">
+                  <span>C$0</span>
+                  <span>C$50,000</span>
+                </div>
+                <h4>Rango de precio: <span id="rangoh4">C$0</span></h4>
+                </div>
+              </section>
+              <section id="descripcionSection">
+                <h3>¿En donde te gustaría que este ubicado el espacio?</h3>
+                <input type="text" name="ubicacion" id="ubicacion" placeholder="Ejemplo: Cerca de la uni rupap">
+                <h3>
+                  Deja una pequeña descripción de lo que buscas 🦔
+                </h3>
+                <textarea name="descripcion" id="descripcion" placeholder="Descripcion"></textarea>
+                <div class="buttonBC">
+                  <button id="buscarChanteButton" data-modal-hide="static-modal">Buscar Chante</button>
+                </div>
+              </section>
+            </div>
+            <!-- contenido en caso de poner en renta -->
+            <div class="ponerRenta" id="ponerRenta">
+              <h1>ayuda dio mio xd xd </h1>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </form>
 {% endblock %}
 {% block script %}
+<script src="{% static 'post/create.js'%}"></script>
 {% endblock %}

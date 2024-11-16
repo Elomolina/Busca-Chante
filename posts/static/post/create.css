@@ -60,16 +60,23 @@ form > div
     align-items: flex-start;
     gap: 1em;
     margin: 1em;
-    margin-top: 2em;
+    margin-top: 1em;
 }
 #ponerRenta, .buscarBC 
 {
     display: none;
 }
-#buscar section 
+#buscar section, #ponerRenta section 
 {
+    padding-bottom: 0.5em;
     display: flex;
     justify-content: center;
+}
+#ponerRenta input 
+{
+    margin-top: 0.5em;
+    width: 80%;
+    border-radius: 5px;
 }
 #rangoPrecio 
 {
@@ -100,16 +107,19 @@ form > div
 }
 #descripcionSection 
 {
-    margin-left: 1em;
+    margin-top: 1.5em;
+    display: flex;
+    flex-direction: column;
 }
 #descripcionSection textarea 
 {
     width: 90%;
+    height: 100px;
     margin-bottom: 1em;
 }
 #descripcionSection h3 
 {
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
 }
 #ubicacion 
 {
@@ -122,7 +132,7 @@ form > div
     display: flex;
     justify-content: center;
 }
-#buscarChanteButton 
+#buscarChanteButton, #rentarChanteButton 
 {
     background-color: #B03052;
     color: white;
@@ -131,7 +141,41 @@ form > div
     margin-bottom: 1em;
     transition: 0.5s;
 }
-#buscarChanteButton:hover 
+#buscarChanteButton:hover, #rentarChanteButton:hover
 {
     transform: scale(1.05);
+}
+#precio_capacidad  
+{
+    margin-top: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    display: flex;
+}
+.buttonBC 
+{
+    margin-top: 1em;
+}
+.uploadImages 
+{
+    margin-top: 1em;
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+}
+#buscarChanteButton:disabled, #rentarChanteButton:disabled
+{
+    background-color: grey;
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+.divImagenes 
+{
+    display: flex;
+    gap: 1em;
+    font-size: 0.8rem;
+}
+.divImagenes button 
+{
+    color:red;
 }

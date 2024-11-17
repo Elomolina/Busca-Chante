@@ -1,6 +1,122 @@
 {% extends 'layout.html '%}
 {% load static %}
-
+{% block style %}
+<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'post/detail.css'%}">
+{% endblock %}
 {% block main %}
-<h1>{{id}}</h1>
+<h1>{{tipo_casa}}</h1>
+<div class="content">
+<section id="carousel">
+    <div id="controls-carousel" class="relative w-full" data-carousel="static">
+        <!-- Carousel wrapper -->
+        <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+             <!-- Item 1 -->
+              {% for img in imagenes%}
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <img src="{{img.imagen.url}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Slider controls -->
+        <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                </svg>
+                <span class="sr-only">Previous</span>
+            </span>
+        </button>
+        <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                </svg>
+                <span class="sr-only">Next</span>
+            </span>
+        </button>
+    </div>
+    <h5 id="fecha">{{espacio_detallado.fecha.date}}</h5>
+</section>
+<section id="information">
+    <h2>Información importante a tener en cuenta 🗒️</h2>
+    <div class="informacion-importante">
+        <h3><span>Precio: </span>{{espacio_detallado.precio}}C$</h3>
+        <h3><span>Cantidad de personas que puede alojar: </span>{{espacio_detallado.cantidad_personas}}</h3>
+        <h3><span>Lugares importantes cercanos: </span>{{espacio_detallado.lugares_importantes}}</h3>
+        <h3><span>Reglas de la casa: </span>{{espacio_detallado.reglas_casa}}</h3>
+    </div>
+</section>
+</div>
+<div class="ubicacion">
+    <h3><span>Ubicación: </span>{{espacio_detallado.ubicacion}}</h3>
+</div>
+<!-- mostrar seccion solo si no es la misma persona que hizo el post -->
+{% if user != espacio_detallado.owner.user %}
+<section id="reservacion">
+    <div class="contacto">
+        <h2>Contacto</h2>
+        <div class="contactoUser">
+            {% if espacio_detallado.owner.profile_pic %}
+            {{espacio_detallado.owner.profile_pic}}
+            {% else %}
+            <img src="{% static 'authentication/avatar-de-hombre.png' %}" alt="" srcset="">
+            {% endif %}
+            <div class="div">
+                <h3><span>Dueño del espacio: </span>{{espacio_detallado.owner.user}}</h3>
+                <h3><span>Número telefónico: </span>{{espacio_detallado.owner.phone_number}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="reservar">
+        <h2>¿Te gustaría agendar un dia para visitar el espacio?</h2>
+        <h4>A {{espacio_detallado.owner.user}} le llegará una notificación para aceptar la visita.</h4>
+        <button>Agendar una visita</button>
+    </div>
+</section>
+{% endif %}
+<hr>
+<section class="comentarios">
+<h3>Comentarios</h3>
+<div class="contenedorComentarios">
+    <div class="comments">
+        {% for c in comentarios %}
+        <div class="individualComment">
+            {% if c.autor.profile_pic %}
+            fotico
+            {% else %}
+            <img src="{% static 'authentication/avatar-de-hombre.png' %}" alt="" srcset="">
+            {% endif %}
+            <div class="infoComentario">
+                <p>{{c.autor.user}}</p>
+                <h3>{{c.comentario}}</h3>
+                <p id="infofecha">{{c.fecha.date}}</p>
+            </div>
+        </div>
+        {% empty %}
+        <h5>Todavía no hay ningún comentario 🦔</h5>
+        {% endfor %}
+    </div>
+    <form id="commentForm">
+        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deja un comentario acerca del espacio</label>
+        <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Comentario"></textarea>
+        <input id="botonComentario" type="submit" value="Comentar" disabled>
+        <input type="hidden" id="postID" value="{{espacio_detallado.id}}">
+        <input type="hidden" id="userID" value="{{user.id}}">
+    </form>
+</div>
+</section>
+<hr>
+{% if espacio_detallado.owner.user == user %}
+<div class="edicionAutor">
+<h3>Este post fue subido por ti.</h3>
+<div class="botonesAutor">
+    <button id="borrarBoton">Borrar Post</button>
+    <button id="editarBoton">Editar Post</button>
+</div>
+</div>
+{% endif %}
+{% endblock %}
+{% block script %}
+<script src="{% static 'post/detail.js'%}"></script>
 {% endblock %}

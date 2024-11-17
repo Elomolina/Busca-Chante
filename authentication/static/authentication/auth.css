@@ -194,3 +194,11 @@ footer h5, footer h4
     align-items: center;
     justify-content: center;
 }
+@media(max-width:600px)
+{
+    #logo-link h1 
+    {
+        background-color: black;
+        display: none;
+    }
+}

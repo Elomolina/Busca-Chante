@@ -58,13 +58,22 @@ form
 {
     width: 80%;
     height: 50px;
-    border: 2px solid #B03052;
+    border: 1px solid gainsboro;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
     border-radius: 10px;
     text-align: center;
+    outline: none;
+}
+.inputs input[type="image"]
+{
+    background-color: none;
+    border: none;
+    box-shadow: none;
 }
 .inputs input[type="submit"]
 {
     background-color: #B03052;
+    border: transparent;
     color: white;
     font-family: "Poppins", sans-serif;
     transition: 1s;

@@ -1,5 +1,167 @@
 {% extends 'layout.html' %}
 {% load static %}
+{% block style %}
+<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'post/recomendar.css'%}">
+{% endblock %}
 {% block main %}
-<h1>{{id}}</h1>
+<div class="titulo">
+    {%if busqueda.autor.profile_pic %}
+    si hay pic
+    {% else %}
+    <img src="{% static 'authentication/avatar-de-hombre.png'%}" alt="" srcset="">
+    {% endif %}
+    <h1>¡<span>{{busqueda.autor.user}}</span> está en la búsqueda de un espacio!</h1>
+</div>
+<section class="ofertar">
+    <div class="informacion">
+        <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">El espacio debe contar con las siguientes
+            características:</h2>
+        <ul class="max-w-md space-y-1 text-gray-500 list-inside dark:text-gray-400">
+            <li class="flex items-center">
+                <svg class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                </svg>
+                <span>Tipo: </span> {{tipo_casa}}
+            </li>
+            <li class="flex items-center">
+                <svg class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                </svg>
+                <span>Rango de precio: </span> 0-{{busqueda.rangoPrecio}}C$
+            </li>
+            <li class="flex items-center">
+                <svg class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                </svg>
+                <span>Ubicacion: </span> {{busqueda.ubicacion}}
+            </li>
+            <li class="flex items-center">
+                <svg class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                </svg>
+                <span>Descripcion: </span> {{busqueda.descripcion}}
+            </li>
+        </ul>
+    </div>
+    <div class="ofertar_div">
+        <h3>¿Tienes en oferta algún espacio que cumpla con estas características?</h3>
+        <p>¡Ofértale a <span>{{busqueda.autor.user}}</span> ese espacio!</p>
+        <button id="ofertarButton" data-modal-target="default-modal" -modal" data-modal-toggle="default-modal">Ofertar
+            espacio</button>
+    </div>
+    <!-- MODAL -->
+    <div id="default-modal" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Oferta uno de tus espacios 🏡
+                    </h3>
+                    <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-hide="default-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-4 md:p-5 space-y-4">
+                    <h5>Marca los espacios que tienes que coincidan con la búsqueda de {{busqueda.autor.user}}</h5>
+                    <h3>Tus espacios disponibles:</h3>
+                    <section class="contenidoModal">
+                        {% for espacios in espacios_disponibles %}
+                        <div class="espacio">
+                            <div class="tipoEspacio">
+                                <p>Tipo: <span>{{espacios.tipo}}</span></p>
+                                <input type="checkbox" name="ofertas" id="postOferta">
+                            </div>
+                            <p>Precio: <span>{{espacios.precio}}C$</span></p>
+                            <div id="controls-carousel" class="relative w-full" data-carousel="static">
+                                <!-- Carousel wrapper -->
+                                <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                                    {% for img in espacios.imagenes %}
+                                    <!-- Item 1 -->
+                                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                        <img src="{{img.imagen.url}}"
+                                            class="carouselImagenes absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                            alt="...">
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <!-- Slider controls -->
+                                <button type="button"
+                                    class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                                    data-carousel-prev>
+                                    <span
+                                        class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 6 10">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2" d="M5 1 1 5l4 4" />
+                                        </svg>
+                                        <span class="sr-only">Previous</span>
+                                    </span>
+                                </button>
+                                <button type="button"
+                                    class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                                    data-carousel-next>
+                                    <span
+                                        class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 6 10">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2" d="m1 9 4-4-4-4" />
+                                        </svg>
+                                        <span class="sr-only">Next</span>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <h3>Parece que no tienes ningún espacio disponible</h3>
+                        {% endfor %}
+                    </section>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <button id="hacerOferta" data-modal-hide="default-modal" type="button"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Hacer
+                        Oferta</button>
+                    <button data-modal-hide="default-modal" type="button"
+                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<hr>
+<section class="ofertas">
+    {% for oferta in ofertas %}
+    <h3>wao una oferta</h3>
+    {% empty %}
+    <h5>No hay ninguna oferta para la búsqueda de {{busqueda.autor.user}} 😔</h5>
+    {% endfor %}
+</section>
+{% endblock %}
+{% block script %}
+<script src="{% static 'post/recomendar.js'%}"></script>
 {% endblock %}

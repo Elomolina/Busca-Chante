@@ -32,23 +32,58 @@ class Index(View):
             "posts": posts
         })
 
+@method_decorator(csrf_exempt, name = 'dispatch')
 class EspacioDetallado(View):
     def get(self, request, id):
         if not request.user.is_authenticated:
             return redirect(reverse("login"))
-        print(id)
+        espacio_detallado = RentarCasa.objects.get(pk = id)
+        tipo_casa = tipos_casa[espacio_detallado.tipoCasa.tipo]
+        imagenes = espacio_detallado.imagenesCasa.all()
+        comentarios = ComentariosRenta.objects.filter(post = espacio_detallado)
         return render(request, "post/detailPost.html", {
-            "id":id
+            "id":id, 
+            "tipo_casa": tipo_casa,
+            "imagenes": imagenes,
+            "espacio_detallado": espacio_detallado,
+            "comentarios": comentarios
         })
+    def post(self, request, id):
+        data = json.loads(request.body)
+        casa = RentarCasa.objects.get(pk = data['postID'])
+        usuario = UserInfo.objects.get(user_id = data['userID'])
+        comentario = ComentariosRenta(post = casa, comentario = data['message'], autor = usuario)
+        comentario.save()
+        return JsonResponse({'sucess': 'Comentario agregado'})
 
 class RecomendarEspacio(View):
     def get(self, request, id):
         if not request.user.is_authenticated:
             return redirect(reverse("login"))
-        print(id)
+        busqueda = BuscarCasa.objects.get(pk = id)
+        tipo_casa = tipos_casa[busqueda.tipoCasa.tipo]
+        #casas que tengo yo en renta
+        user = UserInfo.objects.get(user = request.user)
+        espacios_disponibles = RentarCasa.objects.filter(owner = user)
+        informacion_espacios = []
+        for i  in espacios_disponibles:
+            info = {}
+            imagenes = []
+            info['tipo'] = tipos_casa[i.tipoCasa.tipo]
+            info['precio'] = i.precio
+            info['id'] = i.id
+            for img in i.imagenesCasa.all():
+                imagenes.append(img)
+            info['imagenes'] = imagenes
+            informacion_espacios.append(info)
+        ofertas = []
         return render(request, "post/recomendarEspacio.html", {
-            "id": id
+            "busqueda": busqueda, 
+            "tipo_casa": tipo_casa, 
+            "ofertas": ofertas,
+            "espacios_disponibles": informacion_espacios
         })
+    
 class buscarEspacio(View):
     def get(self, request):
         if not request.user.is_authenticated:

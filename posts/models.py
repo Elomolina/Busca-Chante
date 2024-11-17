@@ -42,3 +42,15 @@ class RentarCasa(models.Model):
 class ImagenesRenta(models.Model):
     casa = models.ForeignKey(RentarCasa, on_delete=models.CASCADE, related_name="imagenesCasa")
     imagen = models.ImageField(upload_to="imagenes_renta")
+
+class ComentariosRenta(models.Model):
+    post = models.ForeignKey(RentarCasa, on_delete=models.CASCADE, related_name="comentariosPostRenta")
+    comentario = models.TextField()
+    autor = models.ForeignKey(UserInfo, on_delete=models.CASCADE, related_name="autorPostRenta")
+    fecha = models.DateTimeField(default=now)
+
+class ComentariosBusqueda(models.Model):
+    post = models.ForeignKey(RentarCasa, on_delete=models.CASCADE, related_name="comentariosPostBusqueda")
+    comentario = models.TextField()
+    autor = models.ForeignKey(UserInfo, on_delete=models.CASCADE, related_name="autorPostBusqueda")
+    fecha = models.DateTimeField(default=now)

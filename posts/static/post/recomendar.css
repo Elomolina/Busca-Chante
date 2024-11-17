@@ -1,0 +1,163 @@
+main 
+{
+    margin-left: 1em;
+}
+h1 
+{
+    font-weight: bold;
+    font-family: 'poppins', sans-serif;
+    font-size: 1.5rem;
+}
+span 
+{
+    font-family: 'coiny', system-ui;
+    color: #B03052;
+}
+.titulo 
+{
+    display: flex;
+    align-items: center;
+}
+.titulo img 
+{
+    width: 60px;
+    height: 60px;
+}
+.informacion 
+{
+    margin-top: 2em;
+}
+.list-inside
+{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.list-inside span 
+{
+    font-weight: lighter;
+    margin-right: 0.3em;
+}
+.list-inside li 
+{
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: 'poppins', sans-serif;
+}
+.ofertar 
+{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0.5em;
+}
+.ofertar_div 
+{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    border: 2px solid gainsboro;
+    border-radius: 10px;
+    padding: 1em;
+    margin-right: 2em;
+}
+.ofertar_div h3 
+{
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.ofertar_div p 
+{
+    font-size: 1.2rem;
+}
+.ofertar_div button 
+{
+    background-color: #B03052;
+    padding: 1em;
+    border-radius: 10px;
+    color: white;
+    transition: 0.5s;
+}
+.ofertar_div button:hover 
+{
+    transform: scale(1.01);
+}
+.ofertas 
+{
+    margin-top: 1.2em;
+    margin-bottom: 1em;
+}
+.espacio 
+{
+    width: min-content;
+    border: 1px solid gainsboro;
+    padding: 0.5em;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.contenidoModal 
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+#controls-carousel
+{
+    height: min-content;
+    width:250px;
+}
+.carouselImagenes
+{
+    border-radius: 10px;
+    width: 250px;
+    height: 250px;
+}
+.tipoEspacio 
+{
+    display: flex;
+    justify-content: space-between;
+}
+.espacio input[type="checkbox"]
+{
+    border-radius: 10px;
+    border: 1px solid grey;
+}
+.swal2-confirm
+{
+    background-color: #B03052;
+    color: white;
+}
+@media(max-width:700px)
+{
+    .list-inside li
+    {
+        font-size: 1rem;
+    }
+    .ofertar 
+    {
+        gap: 1em;
+        flex-direction: column;
+    }
+    .ofertar h3, .ofertar p
+    {
+        font-size: 1rem;
+    }
+    .contenidoModal 
+    {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 1em;
+    }
+    .tipoEspacio
+    {
+        gap: 1em;
+        align-items: center;
+    }
+    .espacio 
+    {
+        width: 80%;
+        align-items: center;
+    }
+}

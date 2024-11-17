@@ -78,7 +78,6 @@ buscarInfo.forEach((r) => {
 
 function camposRellenados(boton, info) {
     let contador = 0;
-
     info.forEach((r) => {
 
         if (r.value.length > 0) {
@@ -102,7 +101,6 @@ function camposRellenados(boton, info) {
         if (contador == info.length) {
             boton.disabled = false;
             return
-
         }
         else {
             boton.disabled = true;
@@ -112,14 +110,9 @@ function camposRellenados(boton, info) {
 }
 
 function eliminarArchivo(e) {
-
-
     let divImagenes = document.querySelectorAll(".divImagenes")
     let file_name = e.target.previousElementSibling;
-    console.log(file_name);
     for (let i = 0; i < divImagenes.length; i++) {
-        console.log(divImagenes[i].firstChild);
-
         if (divImagenes[i].firstChild == file_name) {
             for (let i = 0; i < archivos.length; i++) {
                 if (archivos[i].name == file_name.innerHTML) {
@@ -135,3 +128,86 @@ function eliminarArchivo(e) {
     }
     e.target.parentNode.remove()
 }
+
+rentarChanteButton.addEventListener("click", () => {
+    const formData = new FormData()
+    for (let i = 0; i < archivos.length; i++) {
+        formData.append("files[]", archivos[i])
+    }
+    let information = {
+        "tipoInfo": 'rentar',
+        "tipoCasa": rentarInfo[0].value,
+        "precio": rentarInfo[1].value,
+        "cantidad_personas": rentarInfo[2].value,
+        "ubicacion": rentarInfo[3].value,
+        "descripcion": rentarInfo[4].value,
+        "lugares_importantes": rentarInfo[5].value,
+        "reglas_casa": rentarInfo[6].value,
+    }
+    formData.append("information", JSON.stringify(information))
+    //fetch de las imagenes
+    fetch("", {
+        method: 'POST',
+        body: formData
+    })
+        .then(datos => datos.json())
+        .then((results) => 
+        {
+            if('success' in results)
+                {
+                    Swal.fire({
+                        title: `${results['success']}`,
+                        text: "",
+                        icon: "success",
+                        confirmButtonText: "Continuar"
+                    })
+                    .then((result) => {
+                        if(result.isConfirmed)
+                        {
+                            //volvemos al index si todo se subio correctamente
+                            window.location.href = results['path']
+                            
+                        }
+                    })
+                    return;
+                } 
+        })
+})
+buscarChanteButton.addEventListener("click", () => {
+    let information =
+    {
+        "tipoInfo": "buscar",
+        "tipoCasa": buscarInfo[0].value,
+        "rangoPrecio": buscarInfo[1].value,
+        "ubicacion": buscarInfo[2].value,
+        "descripcion": buscarInfo[3].value
+    }
+    fetch("", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(information)
+    })
+        .then(datos => datos.json())
+        .then((results) => {
+            if ('success' in results) {
+                Swal.fire({
+                    title: `${results['success']}`,
+                    text: "",
+                    icon: "success",
+                    confirmButtonText: "Continuar"
+                })
+                .then((result) => {
+                    if(result.isConfirmed)
+                    {
+                        //volvemos al index si todo se subio correctamente
+                        window.location.href = results['path']
+                        
+                    }
+                })
+                return;
+            }
+        })
+
+})

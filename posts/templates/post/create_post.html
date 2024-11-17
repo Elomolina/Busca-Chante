@@ -1,18 +1,20 @@
 {% extends 'layout.html '%}
 {% load static %}
-
+{% block title %}
+Agregar Post
+{% endblock %}
 {% block style %}
 <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{% static 'post/create.css' %}">
 {% endblock %}
 
 {% block main %}
-<h2>Agrega tu primera publicación en <span>Busca Chante</span></h2>
+<h2>Busca o pon en renta un espacio con <span>Busca Chante</span></h2>
 <p>Ya sea si estás buscando un espacio o bien si quieres poner en renta 😎</p>
 <p>Otros usuarios podrán ver tu publicación así que se específico con lo que buscas o con la habitación, cuarto, casa o
   apartamento que pondrás en renta 🏠</p>
 <hr>
-<form action="" id="postForm">
+<form method="post" id="postForm">
   <h3>¿Estás buscando en rentar o poner en renta?</h3>
   <div>
     <select id="opciones"
@@ -52,7 +54,7 @@
               <section>
                 <h3>Selecciona que tipo de espacio pondrás en renta:</h3>
                 <select id="opciones"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  class="rentarInfo bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                   <option>Casa Completa</option>
                   <option>Apartamento Completo</option>
                   <option>Habitación Privada</option>
@@ -65,22 +67,24 @@
               <section id="precio_capacidad">
                 <div>
                   <h3>Escoge el precio que tendrá la mensualidad (en C$)</h3>
-                  <input type="number" id="rentarPrecio" class="rentarInfo">
+                  <input placeholder="Ejemplo: 10000C$" type="number" id="rentarPrecio" class="rentarInfo">
                 </div>
                 <div>
                   <h3>Ingresa el número de personas que puede alojar:</h3>
-                  <input type="number" id="rentarCantidad" class="rentarInfo">
+                  <input placeholder="Ejemplo: 5" type="number" id="rentarCantidad" class="rentarInfo">
                 </div>
               </section>
               <hr>
               <section id="descripcionSection">
                 <h3>¿En donde se encuentra ubicado el espacio?</h3>
                 <input type="text" name="ubicacion" id="rentarUbicacion" class="rentarInfo" placeholder="Escribe una dirección exacta">
-                <h3>
+                <h3 id="descriptionSpace">
                   Describe como es el espacio:
                 </h3>
                 <textarea name="descripcion" id="rentarDescripcion" class="rentarInfo" placeholder="Descripcion"></textarea>
-                <h3><span>Reglas de la casa:</span> escribe las reglas que debe seguir la persona que rentará tu
+                <h3><span>Lugares importantes: </span>escribe los lugares importantes cerca del espacio (centro comerciales, hopsitales, zonas turisticas)</h3>
+                <input type="text" class="rentarInfo" placeholder="Ejemplo: cerca de Metrocentro, cerca de la Upoli">
+                <h3 id="houseRules"><span>Reglas de la casa:</span> escribe las reglas que debe seguir la persona que rentará tu
                   espacio:</h3>
                 <input type="text" name="reglas" id="rentarReglas" class="rentarInfo" placeholder="Ejemplo: nada de mascotas">
               </section>
@@ -93,7 +97,7 @@
                 </div>
                 <input
                   class="rentarInfo block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                  id="multiple_files" type="file" multiple accept=".png, .jpg, .jpeg">
+                  id="multiple_files" type="file" multiple accept=".png, .jpg, .jpeg, .webp">
               </section>
               <div class="buttonBC">
                 <button id="rentarChanteButton" data-modal-hide="static-modal" disabled>Rentar Chante</button>
@@ -122,6 +126,7 @@
                 </div>
                 <h4>Rango de precio: <span id="rangoh4">C$0</span></h4>
               </section>
+              <hr>
               <section id="descripcionSection">
                 <h3>¿En donde te gustaría que este ubicado el espacio?</h3>
                 <input class="buscarInfo" type="text" name="ubicacion" id="ubicacion" placeholder="Ejemplo: Cerca de la uni rupap">

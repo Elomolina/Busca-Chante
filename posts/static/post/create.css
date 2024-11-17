@@ -179,3 +179,19 @@ form > div
 {
     color:red;
 }
+form section h3 
+{
+    margin-bottom: 1em;
+}
+#houseRules 
+{
+    margin-top: 1em;
+}
+#descriptionSpace
+{
+    margin-top: 1em;
+}
+.swal2-confirm 
+{
+    background-color: #B03052;
+}

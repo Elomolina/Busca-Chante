@@ -3,9 +3,6 @@ let next = document.querySelector("#next");
 let back = document.querySelector("#back");
 let form = document.querySelector("form");
 let register_button = document.querySelector("#register-button");
-
-console.log(inputs_div);
-
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 })

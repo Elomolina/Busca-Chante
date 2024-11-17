@@ -1,18 +1,140 @@
-footer 
+body 
+{
+    font-family: 'poppins', sans-serif;
+}
+footer
 {
     display: none;
 }
-#mas 
+#h3Espacios
 {
-    width: 50;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+#mas
+{
+    width: 50px;
     height: 50px;
     position: fixed;
     bottom: 0;
     right: 0;
     margin: 1em;
     transition: 1s;
+    z-index: 2;
 }
-#mas:hover 
+#mas:hover
 {
     transform: scale(1.1);
+}
+h3, h4
+{
+    padding: 0;
+    margin: 0;
+    margin-left: 1em;
+}
+h3
+{
+
+    margin-top: 1.5em;
+}
+span
+{
+    font-family: "Coiny", system-ui;
+    color: #B03052;
+}
+.post
+{
+    margin: 1em;
+}
+#controls-carousel img
+{
+    z-index: 1;
+    width: 100%;
+    height: 400px;
+
+}
+#controls-carousel
+{
+    z-index: 1;
+    width: 100%;
+}
+
+.posts 
+{
+    margin-left: 1.5em;
+    display: flex;
+    flex-direction: column;
+}
+.postsRentar
+{
+    margin-right: 1em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1em;
+}
+.posts 
+{
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.posts h3 
+{
+    margin: 0;
+}
+.info 
+{
+    width: 100%;
+}
+.info a
+{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    border: 1px solid #B03052;
+    margin-bottom: 1em;
+    padding: 1em;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+.info a:hover 
+{
+    background-color: rgb(235, 232, 232);
+}
+#fecha, #owner 
+{
+    font-size: 0.7rem;
+    color: grey;
+    text-align: end;
+}
+#owner 
+{
+    font-size: 0.9rem;
+    color: #B03052;
+}
+button 
+{
+    background-color: #B03052;
+    color: white;
+    border-radius: 10px;
+    padding: 0.5em;
+    font-weight: bold;
+    font-size: 0.8rem;
+    transition: 0.5s;
+}
+button:hover 
+{
+    transform: scale(1.05);
+}
+@media(max-width:800px)
+{
+    .postsRentar
+    {
+        display: flex;
+        flex-direction: column;
+    }
 }

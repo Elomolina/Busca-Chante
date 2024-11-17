@@ -2,3 +2,20 @@ footer
 {
     display: none;
 }
+nav 
+{
+    display: flex;
+    align-items: center;
+}
+#linkBusqueda 
+{
+    font-family: 'poppins', sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    color: #B03052;
+    transition: 0.1s;
+}
+#linkBusqueda:hover 
+{
+    color: white;
+}

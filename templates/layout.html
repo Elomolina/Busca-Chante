@@ -1,7 +1,8 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+
+<head>
     <link rel="shortcut icon" href="{% static 'authentication/logo_BC.png'%}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'authentication/auth.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +17,10 @@
     {% endblock %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>layout</title>
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
 </head>
 
 <body>
@@ -27,56 +31,73 @@
                 <h1>Busca Chante</h1>
             </div>
         </a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'buscar_espacio'%}" id="linkBusqueda">Búsqueda de renta 🕵️</a>
+        {% endif %}
         <div class="nav-div">
             <img id="menu-logo" src="{% static 'authentication/menu.png'%}" alt="">
+            {% if not user.is_authenticated %}
             <img id="user" src="{% static 'authentication/avatar-de-hombre.png'%}" alt="">
+            {% else %}
+            <div
+                class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                <span class="font-medium text-gray-600 dark:text-gray-300">{{user.first_name|slice:":1"}}{{user.last_name|slice:":1"}}</span>
+            </div>
+
+            {% endif %}
         </div>
         <div class="popUp">
             <div>
                 {% if not user.is_authenticated %}
-                    <a href="{% url 'register'%}">
-                        Registrate
-                    </a>
-              
-              
-                    <a href="{% url 'login'%}">
-                        Inicia Sesión
-                    </a>
+                <a href="{% url 'register'%}">
+                    Registrate
+                </a>
+
+
+                <a href="{% url 'login'%}">
+                    Inicia Sesión
+                </a>
                 {% endif %}
                 {% if user.is_authenticated %}
-           
-                    <a href="">
-                        Subir post
-                    </a>
-                    <a href="">
-                       Cuenta
-                    </a>
-                    <a href="">
-                        Notificaciones
-                    </a>
-                    <a href="">
-                        Mensajes
-                    </a>
-                    <form action="{% url 'logOut' %}" method="post">
-                        <input type="submit" value="Cerrar Sesión">
-                    </form>
+
+                <a href="{% url 'create_post'%}">
+                    Subir post
+                </a>
+                <a href="">
+                    Cuenta
+                </a>
+                <a href="">
+                    Notificaciones
+                </a>
+                <a href="">
+                    Mensajes
+                </a>
+                <a href="">
+                    Calendario
+                </a>
+                <a href="">
+                    Mis guardados
+                </a>
+                <form action="{% url 'logOut' %}" method="post">
+                    <input type="submit" value="Cerrar Sesión">
+                </form>
                 {% endif %}
             </div>
         </div>
     </nav>
-    <main>      
+    <main>
         {% block main %}
         {% endblock %}
     </main>
     <footer>
         <h5>© 2024 Busca Chante, inc.</h5>
         <h4>Elaborado por Elo Moca</h4>
-                <div class="socials">
-                    <img src="{% static 'authentication/github.png'%}" alt="">
-                    <img src="{% static 'authentication/gmail.png'%}" alt="">
-                    <img src="{% static 'authentication/logotipo-de-instagram.png'%}" alt="">
-                    <img src="{% static 'authentication/logotipo-de-linkedin.png'%}" alt="">
-                </div>
+        <div class="socials">
+            <img src="{% static 'authentication/github.png'%}" alt="">
+            <img src="{% static 'authentication/gmail.png'%}" alt="">
+            <img src="{% static 'authentication/logotipo-de-instagram.png'%}" alt="">
+            <img src="{% static 'authentication/logotipo-de-linkedin.png'%}" alt="">
+        </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{% static 'authentication/auth.js'%}"></script>

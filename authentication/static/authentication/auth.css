@@ -21,6 +21,7 @@ nav
 }
 nav, nav div
 {
+    cursor: pointer;
     color: #B03052;
     display: flex;
     gap: 1em;
@@ -109,6 +110,7 @@ footer h5, footer h4
     font-family: "Poppins", sans-serif;
     opacity: 0.9;
     display: none;
+    z-index: 2;
 }
 .popUp div 
 {

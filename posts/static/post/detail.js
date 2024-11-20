@@ -3,6 +3,8 @@ let message = document.getElementById("message")
 let botonComentario = document.getElementById("botonComentario")
 let userID = document.getElementById("userID")
 let postID = document.getElementById("postID")
+let borrarBoton = document.getElementById("borrarBoton")
+let editarBoton = document.getElementById("editarBoton")
 
 commentForm.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -38,5 +40,32 @@ botonComentario.addEventListener("click", () => {
             window.location.href = ""
         }
         
+    })
+})
+
+borrarBoton.addEventListener("click", () => 
+{
+    let postID_value = postID.value;
+    Swal.fire({
+        title: "¿Estás seguro que deseas borrar el espacio?",
+        text: "",
+        icon: "question",
+        confirmButtonText: "Borrar Post"
+    })
+    .then((result) => {
+        if(result.isConfirmed)
+        {
+            fetch(`/borrarEspacio/`, {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postID_value)
+            })
+            .then(data => data.json())
+            .then((resultados) => {
+                window.location.href = "/"
+            })
+        }
     })
 })

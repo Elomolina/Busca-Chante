@@ -6,7 +6,7 @@ from django.utils.timezone import now
 tipos_casa = {
     "CCA": "Casa Completa", 
     "ACA": "Apartamento Completo", 
-    "HP": "Habitación Privado", 
+    "HP": "Habitación Privada", 
     "HC": "Habitación Compartida",
     "CCO": "Casa Compartida",
     "ACO": "Apartamento Compartido"
@@ -49,8 +49,8 @@ class ComentariosRenta(models.Model):
     autor = models.ForeignKey(UserInfo, on_delete=models.CASCADE, related_name="autorPostRenta")
     fecha = models.DateTimeField(default=now)
 
-class ComentariosBusqueda(models.Model):
-    post = models.ForeignKey(RentarCasa, on_delete=models.CASCADE, related_name="comentariosPostBusqueda")
-    comentario = models.TextField()
+class ofertasBusqueda(models.Model):
+    post = models.ForeignKey(BuscarCasa, on_delete=models.CASCADE, related_name="comentariosPostBusqueda")
+    postOferta = models.ForeignKey(RentarCasa, on_delete=models.CASCADE, related_name="postOferta")
     autor = models.ForeignKey(UserInfo, on_delete=models.CASCADE, related_name="autorPostBusqueda")
     fecha = models.DateTimeField(default=now)

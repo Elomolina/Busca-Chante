@@ -55,7 +55,8 @@ class EspacioDetallado(View):
         comentario = ComentariosRenta(post = casa, comentario = data['message'], autor = usuario)
         comentario.save()
         return JsonResponse({'sucess': 'Comentario agregado'})
-
+    
+@method_decorator(csrf_exempt, name = 'dispatch')
 class RecomendarEspacio(View):
     def get(self, request, id):
         if not request.user.is_authenticated:
@@ -76,13 +77,46 @@ class RecomendarEspacio(View):
                 imagenes.append(img)
             info['imagenes'] = imagenes
             informacion_espacios.append(info)
+        #falta
+        offer = ofertasBusqueda.objects.filter(post = busqueda).order_by("-fecha")
         ofertas = []
+        for i in offer:
+            info = {}
+            info['post'] = i.post
+            info['postOferta'] = i.postOferta
+            info['autor'] = i.autor 
+            info['fecha'] = i.fecha
+            info['id'] = i.id
+            #solo una imagen
+            info['imagen'] = i.postOferta.imagenesCasa.all()[0]
+            ofertas.append(info)
         return render(request, "post/recomendarEspacio.html", {
             "busqueda": busqueda, 
             "tipo_casa": tipo_casa, 
             "ofertas": ofertas,
             "espacios_disponibles": informacion_espacios
         })
+    def post(self, request, id):
+        data = json.loads(request.body)
+        post = BuscarCasa.objects.get(pk = id)
+        autor = UserInfo.objects.get(user = request.user)
+        for i in data:
+            postOferta = RentarCasa.objects.get(pk = i)
+            oferta = ofertasBusqueda(post = post,postOferta = postOferta ,autor = autor)
+            oferta.save()
+            print("oferta guardada")
+        
+        ofertas = ofertasBusqueda.objects.all()
+        #ofertas = ofertasBusqueda()
+        return JsonResponse({"success": "Oferta realizada 😎"})
+
+@method_decorator(csrf_exempt, name = 'dispatch')
+class borrarOferta(View):
+    def post(self, request):
+        data = json.loads(request.body)
+        oferta = ofertasBusqueda.objects.get(pk = data)
+        oferta.delete()
+        return JsonResponse({'success': 'oferta borrada 🕵️'})
     
 class buscarEspacio(View):
     def get(self, request):
@@ -105,6 +139,22 @@ class buscarEspacio(View):
         })
 
 @method_decorator(csrf_exempt, name = 'dispatch')
+class borrarEspacio(View):
+    def post(self, request):
+        data = json.loads(request.body)
+        espacio =  RentarCasa.objects.get(pk = data)
+        espacio.delete()
+        return JsonResponse({"sucess": "El espacio ha sido borrado exitosamente"})
+
+@method_decorator(csrf_exempt, name = 'dispatch')
+class borrarBusqueda(View):
+    def post(self, request):
+        data = json.loads(request.body)
+        busqueda =  BuscarCasa.objects.get(pk = data)
+        busqueda.delete()
+        return JsonResponse({"sucess": "El espacio ha sido borrado exitosamente"})
+
+@method_decorator(csrf_exempt, name = 'dispatch')
 class CrearPost(View):
     def get(self, request):
         if not request.user.is_authenticated:
@@ -124,6 +174,7 @@ class CrearPost(View):
                     key = clave
                     break
             data['rangoPrecio'] = int(data['rangoPrecio'])
+            print(key)
             tipo_casa = TiposCasa.objects.get(tipo = key)
             user_info = UserInfo.objects.get(user = request.user)
             buscar_casa = BuscarCasa(tipoCasa = tipo_casa, rangoPrecio = data['rangoPrecio'], ubicacion = data['ubicacion'], descripcion = data['descripcion'], autor = user_info)

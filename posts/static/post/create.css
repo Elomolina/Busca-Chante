@@ -3,6 +3,11 @@ span
     font-family: "Coiny", system-ui;
     color: #B03052;
 }
+nav  h1 
+{
+    font-size: 1.5rem;
+    font-family: 'coiny', system-ui;
+}
 main 
 {
     margin-left: 1.5em;

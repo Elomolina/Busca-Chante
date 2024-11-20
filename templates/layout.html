@@ -52,25 +52,16 @@
                 <a href="{% url 'register'%}">
                     Registrate
                 </a>
-
-
                 <a href="{% url 'login'%}">
                     Inicia Sesión
                 </a>
                 {% endif %}
                 {% if user.is_authenticated %}
-
                 <a href="{% url 'create_post'%}">
                     Subir post
                 </a>
                 <a href="">
                     Cuenta
-                </a>
-                <a href="">
-                    Notificaciones
-                </a>
-                <a href="">
-                    Mensajes
                 </a>
                 <a href="">
                     Calendario

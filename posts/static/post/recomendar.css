@@ -2,6 +2,10 @@ main
 {
     margin-left: 1em;
 }
+nav  h1 
+{
+    font-family: 'coiny', system-ui;
+}
 h1 
 {
     font-weight: bold;
@@ -12,6 +16,20 @@ span
 {
     font-family: 'coiny', system-ui;
     color: #B03052;
+}
+#equis
+{
+    position: absolute;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    margin-right: 1em;
+    top: 15px;
+    transition: 0.2s;
+}
+#equis:hover 
+{
+    transform: scale(1.2);
 }
 .titulo 
 {
@@ -25,10 +43,12 @@ span
 }
 .informacion 
 {
+    width: 100%;
     margin-top: 2em;
 }
 .list-inside
 {
+    width: 90%;
     margin-top: 1em;
     display: flex;
     flex-direction: column;
@@ -41,8 +61,8 @@ span
 }
 .list-inside li 
 {
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 400;
     font-family: 'poppins', sans-serif;
 }
 .ofertar 
@@ -53,12 +73,13 @@ span
 }
 .ofertar_div 
 {
+    height: min-content;
     display: flex;
     flex-direction: column;
     gap: 1em;
     border: 2px solid gainsboro;
     border-radius: 10px;
-    padding: 1em;
+    padding: 1.5em;
     margin-right: 2em;
 }
 .ofertar_div h3 
@@ -84,8 +105,54 @@ span
 }
 .ofertas 
 {
-    margin-top: 1.2em;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 30%));
+    gap: 1em;
+    justify-content: space-around;
+}
+#h5Ofertas
+{
+    text-align: center;
+    color: gray;
+}
+.ofertaSection
+{
+    margin-top: 1em;
     margin-bottom: 1em;
+}
+.ofertaSection > h3 
+{
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+.ofertas h3 
+{
+    margin-bottom: 1em;
+    font-weight: 500;
+}
+.ofertasDiv
+{
+    position: relative;
+    width: 500px;
+    padding: 1em;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+    background-color: gainsboro;
+}
+.ofertasDiv img 
+{
+    width: 500px;
+    height: 300px;
+}
+#hacerOferta:disabled
+{
+    background-color: grey;
+    cursor: not-allowed;
 }
 .espacio 
 {
@@ -128,7 +195,77 @@ span
     background-color: #B03052;
     color: white;
 }
-@media(max-width:700px)
+.ofertas button 
+{
+    margin-top: 1em;
+    background-color: #B03052;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 0.5em;
+    width: 70%;
+}
+.edicionAutor {
+    margin-top: 1em;
+}
+
+.botonesAutor {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    display: flex;
+    gap: 1em;
+}
+
+.botonesAutor button {
+    color: white;
+    width: 40%;
+    padding: 1em;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.botonesAutor button:hover {
+    transform: scale(1.05);
+}
+
+#borrarBoton {
+    background-color: rgb(134, 1, 1);
+}
+
+#editarBoton {
+    background-color: rgb(6, 6, 129);
+}
+.buttonEquis
+{
+    background-color: black;
+}
+#buscarChanteButton
+{
+    background-color: #B03052;
+}
+#rangoPrecio, #descripcionSection
+{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+#buscarChanteButton:disabled, #rentarChanteButton:disabled
+{
+    background-color: grey;
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+#opciones 
+{
+    margin-bottom: 1em;
+}
+.buttonBC
+{
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+}
+@media(max-width:800px)
 {
     .list-inside li
     {
@@ -159,5 +296,21 @@ span
     {
         width: 80%;
         align-items: center;
+    }
+}
+@media(max-width:750px)
+{
+    .ofertas 
+    {
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .ofertasDiv
+    {
+        align-items: center;
+        gap: 1em;
+        width: 80%;
     }
 }

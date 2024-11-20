@@ -2,6 +2,11 @@ body
 {
     font-family: 'poppins', sans-serif;
 }
+nav  h1 
+{
+    font-size: 1.5rem;
+    font-family: 'coiny', system-ui;
+}
 footer
 {
     display: none;
@@ -130,7 +135,14 @@ button:hover
 {
     transform: scale(1.05);
 }
-@media(max-width:800px)
+@media(max-width:1000px)
+{
+    .postsRentar
+    {
+       grid-template-columns: 1fr 1fr;
+    }
+}
+@media(max-width:600px)
 {
     .postsRentar
     {

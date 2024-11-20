@@ -11,13 +11,14 @@
     {% else %}
     <img src="{% static 'authentication/avatar-de-hombre.png'%}" alt="" srcset="">
     {% endif %}
+    <input type="hidden" id="buscarID" value="{{busqueda.id}}">
     <h1>¡<span>{{busqueda.autor.user}}</span> está en la búsqueda de un espacio!</h1>
 </div>
 <section class="ofertar">
     <div class="informacion">
         <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">El espacio debe contar con las siguientes
             características:</h2>
-        <ul class="max-w-md space-y-1 text-gray-500 list-inside dark:text-gray-400">
+        <ul id="ulInformacion" class="list-inside">
             <li class="flex items-center">
                 <svg class="w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -52,6 +53,7 @@
             </li>
         </ul>
     </div>
+    {% if busqueda.autor.user != user %}
     <div class="ofertar_div">
         <h3>¿Tienes en oferta algún espacio que cumpla con estas características?</h3>
         <p>¡Ofértale a <span>{{busqueda.autor.user}}</span> ese espacio!</p>
@@ -89,7 +91,8 @@
                         <div class="espacio">
                             <div class="tipoEspacio">
                                 <p>Tipo: <span>{{espacios.tipo}}</span></p>
-                                <input type="checkbox" name="ofertas" id="postOferta">
+                                <input type="hidden" value="{{espacios.id}}">
+                                <input type="checkbox" name="ofertas" id="postOferta" class="checkboxOfertas">
                             </div>
                             <p>Precio: <span>{{espacios.precio}}C$</span></p>
                             <div id="controls-carousel" class="relative w-full" data-carousel="static">
@@ -142,7 +145,7 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button id="hacerOferta" data-modal-hide="default-modal" type="button"
+                    <button disabled id="hacerOferta" data-modal-hide="default-modal" type="button"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Hacer
                         Oferta</button>
                     <button data-modal-hide="default-modal" type="button"
@@ -151,16 +154,107 @@
             </div>
         </div>
     </div>
-
+    {% endif %}
 </section>
 <hr>
-<section class="ofertas">
-    {% for oferta in ofertas %}
-    <h3>wao una oferta</h3>
-    {% empty %}
-    <h5>No hay ninguna oferta para la búsqueda de {{busqueda.autor.user}} 😔</h5>
-    {% endfor %}
+<section class="ofertaSection">
+    <h3>Ofertas</h3>
+    <div class="ofertas">
+        {% for oferta in ofertas %}
+        <div class="ofertasDiv">
+            {% if user == busqueda.autor.user %}
+            <input type="hidden" value="{{oferta.id}}">
+            <img src="{% static 'post/cancelar.png' %}" alt="" srcset="" class="equis" id="equis">
+            {% endif %}
+            <h3>¡{{oferta.autor.user}} te ha hecho una oferta!</h3>
+            <p>El siguiente espacio coincide con tu búsqueda:</p>
+            <img src="{{oferta.imagen.imagen.url}}" alt="" srcset="">
+            <p><span>Precio:</span> {{oferta.postOferta.precio}}C$</p>
+            <button>
+                <a target="_blank" href="{%url 'espacio_detallado' oferta.postOferta.id%}">
+                    Ver más información
+                </a>
+            </button>
+        </div>
+        {% empty %}
+        <h5 id="h5Ofertas">No hay ninguna oferta para la búsqueda de {{busqueda.autor.user}} 😔</h5>
+        {% endfor %}
+    </div>
 </section>
+{% if busqueda.autor.user == user %}
+<div class="edicionAutor">
+<h3>Esta búsqueda fue subido por ti.</h3>
+<div class="botonesAutor">
+    <button id="borrarBoton">Borrar búsqueda</button>
+    <button id="editarBoton" data-modal-target="static-modal" data-modal-toggle="static-modal">Editar búsqueda</button>
+    <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
+      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <!-- Modal header -->
+          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+              <span>
+                Busca Chante
+              </span>
+            </h3>
+            <button type="button"
+              class="buttonEquis text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              data-modal-hide="static-modal">
+              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+          <!-- Modal body -->
+          <div class="modalContent p-4 md:p-5 space-y-4">
+            <div class="buscar" id="buscar">
+              <section>
+                <h3>Selecciona que tipo de espacio buscas:</h3>
+                <select id="opciones"
+                  class="buscarInfo bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option>Casa Completa</option>
+                  <option>Apartamento Completo</option>
+                  <option>Habitación Privada</option>
+                  <option>Habitación Compartida</option>
+                  <option>Casa Compartida</option>
+                  <option>Apartamento Compartido</option>
+                </select>
+              </section>
+              <section id="rangoPrecio">
+                <h3>Escoge el rango de precio según tu presupesto mensual (C$)</h3>
+                <input id="minmax-range" type="range" min="0" max="50000" step="100" value="0"
+                  class="buscarInfo w-full h-4 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+                <div class="rango">
+                  <span>C$0</span>
+                  <span>C$50,000</span>
+                </div>
+                <h4>Rango de precio: <span id="rangoh4">C$0</span></h4>
+              </section>
+              <hr>
+              <section id="descripcionSection">
+                <h3>¿En donde te gustaría que este ubicado el espacio?</h3>
+                <input class="buscarInfo" type="text" name="ubicacion" id="ubicacion" placeholder="Ejemplo: Cerca de la uni rupap">
+                <h3>
+                  Deja una pequeña descripción de lo que buscas 🦔
+                </h3>
+                <textarea class="buscarInfo" name="descripcion" id="descripcion" placeholder="Descripcion"></textarea>
+              </section>
+              <div class="buttonBC">
+                <button id="buscarChanteButton" data-modal-hide="static-modal" disabled>Buscar Chante</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+{% endif %}
 {% endblock %}
 {% block script %}
 <script src="{% static 'post/recomendar.js'%}"></script>

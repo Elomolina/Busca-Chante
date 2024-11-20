@@ -1,96 +1,110 @@
-main
-{
+main {
     margin-left: 1em;
     font-family: 'poppins', sans-serif;
 }
-h1 
-{
+
+h1 {
     font-size: 1.5rem;
     font-weight: bold;
 }
-#controls-carousel
-{
+
+#carousel {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+
+#controls-carousel {
     border-radius: 20px;
-    background-color: black;
     margin-top: 1em;
-    width: 100%;
+    width: 500px;
     z-index: 1;
 }
-.informacion-importante
+
+#controls-carousel img {
+    width: 500px;
+    height: 400px;
+}
+.swal2-confirm 
 {
+    background-color: #B03052;
+}
+.informacion-importante {
     border-radius: 20px;
     border: 2px solid #B03052;
     display: flex;
     flex-direction: column;
     gap: 1em;
     padding: 1em;
-    box-shadow: 2px 2px 2px 2px rgba(0,0,0, 0.2);
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
-#information h2 
-{
+
+#information h2 {
     margin-bottom: 1em;
     font-weight: bold;
 }
-.content 
-{
+
+.content {
     display: grid;
     gap: 1em;
     align-items: center;
-    grid-template-columns: 50% 40%;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr;
 }
-span 
-{
+
+span {
     color: #B03052;
     font-family: 'coiny', system-ui;
 }
-#fecha 
-{
+
+#fecha {
     margin-top: 0.5em;
     color: grey;
     font-size: 0.8rem;
     text-align: end;
 }
-.ubicacion 
-{
+
+.ubicacion {
     font-size: 1.4rem;
     margin-top: 1.5em;
     margin-bottom: 1.5em;
     border-bottom: 1px solid rgb(200, 198, 198);
 }
-.contacto, .contactoUser div
-{
+
+.contacto,
+.contactoUser div {
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
-.contactoUser 
-{
+
+.contactoUser {
     display: flex;
     align-items: center;
     gap: 0.5em;
 }
-.contactoUser img 
-{
+
+.contactoUser img {
     width: 50px;
     height: 50px;
 }
-.contacto h2 
-{
+
+.contacto h2 {
     font-weight: bold;
     font-size: 1.5rem;
 }
-.contacto h3 
-{
+
+.contacto h3 {
     font-size: 1.2rem;
 }
-#reservacion 
-{
+
+#reservacion {
     display: flex;
     justify-content: space-between;
 }
 
-.reservar 
-{
+.reservar {
     padding: 1em;
     border-radius: 20px;
     margin-bottom: 1em;
@@ -100,16 +114,16 @@ span
     margin-right: 2em;
     justify-content: center;
     border: 1px solid white;
-    box-shadow: 2px 2px 2px 2px rgba(0,0,0, 0.2);
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
-.reservar h2 
-{
+
+.reservar h2 {
     color: #B03052;
     font-size: 1.3rem;
     font-family: 'coiny', system-ui;
 }
-.reservar button 
-{
+
+.reservar button {
     margin-top: 1.2em;
     margin-bottom: 1.2em;
     padding: 1em;
@@ -119,146 +133,348 @@ span
     border-radius: 20px;
     width: 80%;
 }
-.comentarios 
-{
+
+.comentarios {
     margin-bottom: 1em;
 }
-.comentarios h3
-{
+
+.comentarios h3 {
     margin-top: 1.2em;
     font-weight: bold;
     font-size: 1.2rem;
 }
-.comentarios form 
-{
+
+.comentarios form {
     height: min-content;
     padding: 1em;
     width: 30%;
     border: 1px solid gainsboro;
-    box-shadow: 1px 1px 1px 1px rgba(0,0,0, 0.2);
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
-.comentarios input[type="submit"]
-{
+
+.comentarios input[type="submit"] {
     background-color: #B03052;
     color: white;
     padding: 0.5em;
     border-radius: 10px;
     margin-top: 1em;
 }
-.comentarios input[type="submit"]:disabled
-{
+
+.comentarios input[type="submit"]:disabled {
     background-color: gray;
     cursor: not-allowed;
 }
-.comments 
-{
+
+.comments {
     width: 60%;
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
-.individualComment 
-{
+
+.individualComment {
     display: flex;
     gap: 1em;
 }
-.infoComentario 
-{
+
+.infoComentario {
     width: 80%;
     border-radius: 10px;
     padding: 1em;
     background-color: gainsboro;
 }
-.infoComentario h3 
-{
+
+.infoComentario h3 {
     font-size: 1rem;
     margin: 0.5em;
 }
-#infofecha 
-{
+
+#infofecha {
     font-size: 0.7rem;
     text-align: end;
 }
-.individualComment img 
-{
+
+.individualComment img {
     width: 30px;
     height: 30px;
 }
-.contenedorComentarios 
-{
+
+.contenedorComentarios {
     margin-top: 1em;
     display: flex;
 }
-.edicionAutor 
-{
+
+.edicionAutor {
     margin-top: 1em;
 }
-.botonesAutor 
-{
+
+.botonesAutor {
     margin-top: 1em;
     margin-bottom: 1em;
     display: flex;
     gap: 1em;
 }
-.botonesAutor button
-{
+
+.botonesAutor button {
     color: white;
     width: 40%;
     padding: 1em;
     border-radius: 10px;
     transition: 0.5s;
 }
-.botonesAutor button:hover 
+
+.botonesAutor button:hover {
+    transform: scale(1.05);
+}
+
+#borrarBoton {
+    background-color: rgb(134, 1, 1);
+}
+
+#editarBoton {
+    background-color: rgb(6, 6, 129);
+}
+
+span 
+{
+    font-family: "Coiny", system-ui;
+    color: #B03052;
+}
+nav  h1 
+{
+    font-size: 1.5rem;
+    font-family: 'coiny', system-ui;
+}
+main 
+{
+    margin-left: 1.5em;
+}
+h2 
+{
+    margin-bottom: 1.5em;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+p
+{
+    line-height: 2em;
+    margin-bottom: 1em;
+}
+form 
+{
+    margin-top: 1.5em;
+}
+#opciones 
+{
+    width: 60%;
+}
+form > h3 
+{
+    margin-bottom: 1em;
+}
+form > div 
+{
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+#crearPostBoton 
+{
+    background-color: #B03052;
+    color: white;
+    padding: 1em;
+    border-radius: 10px;
+    margin-top: 1em;
+    position: relative;
+    bottom: 8px;
+    transition: 0.5s;
+}
+#crearPostBoton:hover 
+{
+    background-color: #FEE5EA;
+    color: #B03052;
+    font-weight: bold;
+}
+#buscar 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+    margin: 1em;
+    margin-top: 1em;
+}
+#buscar section, #ponerRenta section 
+{
+    padding-bottom: 0.5em;
+    display: flex;
+    justify-content: center;
+}
+#ponerRenta input 
+{
+    margin-top: 0.5em;
+    width: 80%;
+    border-radius: 5px;
+}
+#rangoPrecio 
+{
+    border-top: 1px solid rgb(195, 195, 195);
+    padding-top: 1.5em;
+    flex-direction: column;
+}
+#rangoPrecio span 
+{
+    font-weight: 400;
+}
+.modalContent
+{
+    height: 100%;
+}
+#minmax-range 
+{
+    margin-top: 1em;
+}
+.rango 
+{
+    display: flex;
+    justify-content: space-between;
+}
+#rangoh4
+{
+    font-weight: bold;
+}
+#descripcionSection 
+{
+    margin-top: 1.5em;
+    display: flex;
+    flex-direction: column;
+}
+#descripcionSection textarea 
+{
+    width: 90%;
+    height: 100px;
+    margin-bottom: 1em;
+}
+#descripcionSection h3 
+{
+    margin-bottom: 0.5em;
+}
+#ubicacion 
+{
+    width: 90%;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
+.buttonBC
+{
+    display: flex;
+    justify-content: center;
+}
+#buscarChanteButton, #rentarChanteButton 
+{
+    background-color: #B03052;
+    color: white;
+    padding: 1em;
+    border-radius: 10px;
+    margin-bottom: 1em;
+    transition: 0.5s;
+}
+#buscarChanteButton:hover, #rentarChanteButton:hover
 {
     transform: scale(1.05);
 }
-#borrarBoton 
+#precio_capacidad  
 {
-    background-color: rgb(134, 1, 1);
+    margin-top: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    display: flex;
 }
-#editarBoton 
+.buttonBC 
 {
-    background-color: rgb(6, 6, 129);
+    margin-top: 1em;
 }
-@media(max-width: 700px)
+
+#buscarChanteButton:disabled, #rentarChanteButton:disabled
 {
-    h3  
-    {
+    background-color: grey;
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+form section h3 
+{
+    margin-bottom: 1em;
+}
+#houseRules 
+{
+    margin-top: 1em;
+}
+#descriptionSpace
+{
+    margin-top: 1em;
+}
+
+.buttonEquis
+{
+    background-color: black;
+}
+
+@media(max-width: 800px) {
+    h3 {
         font-size: 1rem;
     }
-    .contacto h3 
-    {
+
+    .contacto h3 {
         font-size: 1rem;
     }
-    #reservacion
-    {
+
+    #reservacion {
         flex-direction: column;
         gap: 1em;
     }
-    .content 
-    {
+
+    .content {
         display: flex;
         flex-direction: column;
     }
-    .content section 
-    {
+
+    .content section {
         width: 90%;
     }
-    .contenedorComentarios 
-    {
+
+    .contenedorComentarios {
         flex-direction: column;
     }
-    .contenedorComentarios form 
-    {
+
+    .contenedorComentarios form {
         order: 1;
     }
-    .comments 
-    {
+
+    .comments {
         margin-top: 1.5em;
         order: 2;
     }
-    .contenedorComentarios div, .contenedorComentarios form
-    {
+
+    .contenedorComentarios div,
+    .contenedorComentarios form {
         width: 90%;
     }
+    #controls-carousel
+    {
+        width: 300px;
+        height: 300px;
+    }
+    #controls-carousel div {
+        width: 300px;
+        height: 300px;
+    }
+    #controls-carousel img 
+    {
+        width: 300px;
+        height: 300px;
+    }
+    
+   
+
 }

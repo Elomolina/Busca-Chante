@@ -5,6 +5,79 @@ let userID = document.getElementById("userID")
 let postID = document.getElementById("postID")
 let borrarBoton = document.getElementById("borrarBoton")
 let editarBoton = document.getElementById("editarBoton")
+let actualizarChanteButton = document.getElementById("actualizarChanteButton")
+let rentarInfo = document.querySelectorAll(".rentarInfo")
+
+
+rentarInfo.forEach((renta) => {
+    renta.addEventListener("input", desbloquearBoton)
+})
+editarBoton.addEventListener("click", () => {
+    desbloquearBoton()
+})
+
+
+actualizarChanteButton.addEventListener("click", actualizarDatos)
+
+function actualizarDatos()
+{
+    informacion = {
+        'tipoCasa': document.getElementById("opciones").value,
+        'precio': document.getElementById("rentarPrecio").value,
+        'cantidad': document.getElementById('rentarCantidad').value,
+        'ubicacion': document.getElementById('rentarUbicacion').value,
+        'descripcion': document.getElementById('rentarUbicacion').value, 
+        'reglasCasa': document.getElementById('rentarReglas').value,
+        'rentarLugaresImportantes': document.getElementById('rentarLugaresImportantes').value,
+        'postID': postID.value
+    }
+    console.log(informacion);
+    Swal.fire({
+        title: "¿Estás seguro que deseas actualizar datos del espacio?",
+        text: "",
+        icon: "question",
+        confirmButtonText: "Actualizar Post"
+    })
+    .then((result) => {
+        if(result.isConfirmed)
+        {
+            fetch("/actualizarRenta/", {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(informacion)
+            })
+            .then(data => data.json())
+            .then((resultados) => {
+                if('success' in resultados)
+                {
+                    window.location.href = ""
+                }
+            })
+        }
+    })
+    
+}
+
+function desbloquearBoton()
+{
+    let contador = 0;
+    rentarInfo.forEach((renta) => {
+        if(renta.value.length > 0)
+        {
+            contador++;
+        }
+    })
+    if(contador == rentarInfo.length)
+    {
+        actualizarChanteButton.disabled = false
+    }
+    else 
+    {
+        actualizarChanteButton.disabled = true
+    }
+}
 
 commentForm.addEventListener('submit', (e) => {
     e.preventDefault()

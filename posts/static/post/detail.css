@@ -370,7 +370,7 @@ form > div
     display: flex;
     justify-content: center;
 }
-#buscarChanteButton, #rentarChanteButton 
+#buscarChanteButton, #actualizarChanteButton 
 {
     background-color: #B03052;
     color: white;
@@ -395,7 +395,7 @@ form > div
     margin-top: 1em;
 }
 
-#buscarChanteButton:disabled, #rentarChanteButton:disabled
+#buscarChanteButton:disabled, #actualizarChanteButton:disabled
 {
     background-color: grey;
     opacity: 0.8;

@@ -196,3 +196,29 @@ class CrearPost(View):
                 imagenes_renta = ImagenesRenta(casa = rentar_casa, imagen = i)
                 imagenes_renta.save()
             return JsonResponse({"success": "Espacio en renta subido 🥳", "path": "/"})
+
+@method_decorator(csrf_exempt, name = 'dispatch')
+class actualizarRenta(View):
+    def post(self, request):
+        data = json.loads(request.body)
+        tipoCasa = data['tipoCasa']
+        key = ''
+        for clave, valor in tipos_casa.items():
+            if valor == tipoCasa:
+                key = clave
+        tipo = TiposCasa.objects.get(tipo = key)
+        actualizacion = RentarCasa.objects.filter(pk = data['postID']).update(tipoCasa = tipo.id,precio = int(data['precio']), cantidad_personas = int(data['cantidad']), ubicacion = data['ubicacion'], descripcion = data['descripcion'], lugares_importantes = data['rentarLugaresImportantes'] ,reglas_casa = data['reglasCasa'])
+        return JsonResponse({"success": "Los datos han sido actualizados"})
+    
+@method_decorator(csrf_exempt, name = 'dispatch')
+class actualizarBusqueda(View):
+    def post(self, request):
+        data = json.loads(request.body)
+        tipoCasa = data['tipoCasa']
+        key = ''
+        for clave, valor in tipos_casa.items():
+            if valor == tipoCasa:
+                key = clave
+        tipo = TiposCasa.objects.get(tipo = key)
+        actualizacion = BuscarCasa.objects.filter(pk = data['buscarID']).update(tipoCasa = tipo.id, rangoPrecio = int(data['precio']), ubicacion = data['ubicacion'], descripcion = data['descripcion'])
+        return JsonResponse({"success": "Los datos han sido actualizados"})

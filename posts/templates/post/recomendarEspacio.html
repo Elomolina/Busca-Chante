@@ -227,25 +227,25 @@
               </section>
               <section id="rangoPrecio">
                 <h3>Escoge el rango de precio según tu presupesto mensual (C$)</h3>
-                <input id="minmax-range" type="range" min="0" max="50000" step="100" value="0"
+                <input value="{{busqueda.rangoPrecio}}"  id="minmax-range" type="range" min="0" max="50000" step="100" value="0"
                   class="buscarInfo w-full h-4 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
                 <div class="rango">
                   <span>C$0</span>
                   <span>C$50,000</span>
                 </div>
-                <h4>Rango de precio: <span id="rangoh4">C$0</span></h4>
+                <h4>Rango de precio: <span id="rangoh4">0-{{busqueda.rangoPrecio}}C$</span></h4>
               </section>
               <hr>
               <section id="descripcionSection">
                 <h3>¿En donde te gustaría que este ubicado el espacio?</h3>
-                <input class="buscarInfo" type="text" name="ubicacion" id="ubicacion" placeholder="Ejemplo: Cerca de la uni rupap">
+                <input value ="{{busqueda.ubicacion}}" class="buscarInfo" type="text" name="ubicacion" id="ubicacion" placeholder="Ejemplo: Cerca de la uni rupap">
                 <h3>
                   Deja una pequeña descripción de lo que buscas 🦔
                 </h3>
-                <textarea class="buscarInfo" name="descripcion" id="descripcion" placeholder="Descripcion"></textarea>
+                <textarea class="buscarInfo" name="descripcion" id="descripcion" placeholder="Descripcion">{{busqueda.descripcion}}</textarea>
               </section>
               <div class="buttonBC">
-                <button id="buscarChanteButton" data-modal-hide="static-modal" disabled>Buscar Chante</button>
+                <button id="buscarChanteButton" data-modal-hide="static-modal" disabled>Actualizar búsqueda</button>
               </div>
             </div>
           </div>

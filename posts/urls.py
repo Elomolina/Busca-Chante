@@ -8,5 +8,7 @@ urlpatterns=[
     path('recomendarEspacio/<int:id>/', views.RecomendarEspacio.as_view(), name = "recomendar_espacio"),
     path('borrarOferta/', views.borrarOferta.as_view(), name = "borrarOferta"),
     path('borrarEspacio/', views.borrarEspacio.as_view(), name = "borrarEspacio"),
-    path('borrarBusqueda/', views.borrarBusqueda.as_view(), name = "borrarBusqueda")
+    path('borrarBusqueda/', views.borrarBusqueda.as_view(), name = "borrarBusqueda"),
+    path('actualizarRenta/', views.actualizarRenta.as_view(), name = "actualizarRenta"),
+    path('actualizarBusqueda/', views.actualizarBusqueda.as_view(), name = "actualizarBusqueda"),
 ]

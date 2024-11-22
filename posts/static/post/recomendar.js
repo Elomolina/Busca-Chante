@@ -1,7 +1,10 @@
 let hacerOferta = document.getElementById("hacerOferta")
 let checkboxOfertas = document.querySelectorAll(".checkboxOfertas")
 let equis = document.querySelectorAll(".equis")
+let editarBoton = document.getElementById("editarBoton")
 let borrarBoton = document.getElementById("borrarBoton")
+let buscarInfo = document.querySelectorAll(".buscarInfo")
+let buscarChanteButton = document.getElementById("buscarChanteButton")
 let contador = 0;
 let minmax_range = document.getElementById("minmax-range")
 minmax_range.addEventListener("input", (e) => {
@@ -10,6 +13,37 @@ minmax_range.addEventListener("input", (e) => {
     rangoh4.innerHTML = `C$0 - C$ ${e.target.value}`;
 })
 
+
+
+
+buscarChanteButton.addEventListener("click", actualizarDatos)
+
+editarBoton.addEventListener("click", () => {
+  desbloquearBoton()
+})
+
+buscarInfo.forEach((buscar) => {
+  buscar.addEventListener("input", desbloquearBoton)
+})
+
+function desbloquearBoton()
+{
+    let contador = 0;
+    buscarInfo.forEach((renta) => {
+        if(renta.value.length > 0)
+        {
+            contador++;
+        }
+    })
+    if(contador == buscarInfo.length && minmax_range.value > 0)
+    {
+      buscarChanteButton.disabled = false
+    }
+    else 
+    {
+      buscarChanteButton.disabled = true
+    }
+}
 borrarBoton.addEventListener("click", () => {
   let buscarID = document.getElementById("buscarID").value 
   Swal.fire({
@@ -169,5 +203,43 @@ function borrarOferta(e)
     }
   })
   
+  
+}
+
+function actualizarDatos()
+{
+  informacion = {
+    'buscarID': document.getElementById('buscarID').value,
+    'tipoCasa': document.getElementById('opciones').value, 
+    'precio': document.getElementById('minmax-range').value,
+    'ubicacion': document.getElementById('ubicacion').value,
+    'descripcion': document.getElementById('descripcion').value
+  }
+  Swal.fire({
+    title: `Actualizar búsqueda`,
+    text: "Actualiza los datos de tu búsqueda",
+    icon: "success",
+    confirmButtonText: "Actualizar búsqueda"
+  })
+  .then((resultados) => {
+    if(resultados.isConfirmed)
+    {
+      fetch('/actualizarBusqueda/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(informacion)
+      })
+      .then(data => data.json())
+      .then((results) => {
+        if('success' in results)
+        {
+          window.location.href = ""
+        }
+      })
+    }
+
+  })
   
 }

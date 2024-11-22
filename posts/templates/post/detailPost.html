@@ -155,30 +155,30 @@
               <section id="precio_capacidad">
                 <div>
                   <h3>Escoge el precio que tendrá la mensualidad (en C$)</h3>
-                  <input placeholder="Ejemplo: 10000C$" type="number" id="rentarPrecio" class="rentarInfo">
+                  <input value="{{espacio_detallado.precio}}" placeholder="Ejemplo: 10000C$" type="number" id="rentarPrecio" class="rentarInfo">
                 </div>
                 <div>
                   <h3>Ingresa el número de personas que puede alojar:</h3>
-                  <input placeholder="Ejemplo: 5" type="number" id="rentarCantidad" class="rentarInfo">
+                  <input value="{{espacio_detallado.cantidad_personas}}" placeholder="Ejemplo: 5" type="number" id="rentarCantidad" class="rentarInfo">
                 </div>
               </section>
               <hr>
               <section id="descripcionSection">
                 <h3>¿En donde se encuentra ubicado el espacio?</h3>
-                <input type="text" name="ubicacion" id="rentarUbicacion" class="rentarInfo" placeholder="Escribe una dirección exacta">
+                <input value="{{espacio_detallado.ubicacion}}" type="text" name="ubicacion" id="rentarUbicacion" class="rentarInfo" placeholder="Escribe una dirección exacta">
                 <h3 id="descriptionSpace">
                   Describe como es el espacio:
                 </h3>
-                <textarea name="descripcion" id="rentarDescripcion" class="rentarInfo" placeholder="Descripcion"></textarea>
+                <textarea name="descripcion" id="rentarDescripcion" class="rentarInfo" placeholder="Descripcion">{{espacio_detallado.descripcion}}</textarea>
                 <h3><span>Lugares importantes: </span>escribe los lugares importantes cerca del espacio (centro comerciales, hopsitales, zonas turisticas)</h3>
-                <input type="text" class="rentarInfo" placeholder="Ejemplo: cerca de Metrocentro, cerca de la Upoli">
+                <input id="rentarLugaresImportantes" value="{{espacio_detallado.lugares_importantes}}" type="text" class="rentarInfo" placeholder="Ejemplo: cerca de Metrocentro, cerca de la Upoli">
                 <h3 id="houseRules"><span>Reglas de la casa:</span> escribe las reglas que debe seguir la persona que rentará tu
                   espacio:</h3>
-                <input type="text" name="reglas" id="rentarReglas" class="rentarInfo" placeholder="Ejemplo: nada de mascotas">
+                <input value="{{espacio_detallado.reglas_casa}}" type="text" name="reglas" id="rentarReglas" class="rentarInfo" placeholder="Ejemplo: nada de mascotas">
               </section>
               <hr>
               <div class="buttonBC">
-                <button id="rentarChanteButton" data-modal-hide="static-modal" disabled>Rentar Chante</button>
+                <button id="actualizarChanteButton" data-modal-hide="static-modal" disabled>Actualizar Chante</button>
               </div>
             </div>
           </div>

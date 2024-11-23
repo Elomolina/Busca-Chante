@@ -7,7 +7,7 @@
 {% block main %}
 <div class="titulo">
     {%if busqueda.autor.profile_pic %}
-    si hay pic
+    <img src="{{profile_pic.url}}" id="pp">
     {% else %}
     <img src="{% static 'authentication/avatar-de-hombre.png'%}" alt="" srcset="">
     {% endif %}

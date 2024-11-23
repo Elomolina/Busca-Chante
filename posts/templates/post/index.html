@@ -8,8 +8,10 @@ Inicio
 <link rel="stylesheet" href="{% static 'post/index.css'%}">
 {% endblock %}
 {% block main %}
-<form action="" id="search">
-    <input type="text" placeholder="Busca según ubicación, tipo de habitación, precio o usuario">
+<form method="post" action="{% url 'busquedaPost'%}" id="search">
+    {% csrf_token %}
+    <input id="busqueda" type="text" name="busqueda" placeholder="Busca según ubicación, tipo de habitación, precio o usuario">
+    <input type="hidden" name="tipo" value="busquedaEspacio">
 </form>
 <h3 id="h3Espacios">Espacios en Renta</h3>
 <section class="postsRentar">

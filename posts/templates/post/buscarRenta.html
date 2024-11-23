@@ -9,9 +9,11 @@ Inicio
 <link rel="stylesheet" href="{% static 'post/buscarRenta.css'%}">
 {% endblock %}
 {% block main %}
-<form action="" id="search">
-    <input type="text" placeholder="Busca según ubicación, tipo de habitación, precio o usuario">
-</form>
+<!-- <form action="{% url 'busquedaPost' %}" id="search" method="post">
+    {% csrf_token %}
+    <input id="busqueda" type="text" name="busqueda" placeholder="Busca según ubicación, tipo de habitación, precio o usuario">
+    <input type="hidden" name="tipo" value="busquedaRenta">
+</form> -->
 <h3><span>¿Estás rentando un espacio?</span></h3>
 <br>
 <h4>

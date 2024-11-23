@@ -15,4 +15,5 @@ urlpatterns=[
     path('misGuardados/', views.misGuardados.as_view(), name = "misGuardados"),
     path('userProfile/', views.userProfile.as_view(), name = "userProfile"),
     path('actualizarProfilePic/', views.actualizarProfilePic.as_view(), name = "actualizarProfilePic"),
+    path('busquedaPost/', views.busquedaPost.as_view(), name = "busquedaPost")
 ]

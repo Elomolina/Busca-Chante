@@ -1,5 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
@@ -307,3 +308,65 @@ class actualizarProfilePic(View):
             user.profile_pic = i 
             user.save()
         return JsonResponse({"success": "Foto de perfil actualizada"})
+    
+@method_decorator(csrf_exempt, name = 'dispatch')
+class busquedaPost(View):
+    def post(self, request):
+        data = request.POST
+        if data['tipo'] == 'busquedaEspacio':
+            espacios_renta = []
+            tipo = []
+            try:
+                for clave, valor in tipos_casa.items():
+                    if data['busqueda'].lower() in valor.lower():
+                        tipo.append(clave)
+            except KeyError:
+                pass
+            precio = 0
+            try:
+                precio = int(data['busqueda'])
+            except ValueError:
+                precio = 0
+
+            if len(tipo) > 0:
+                for i in tipo:
+                    renta = RentarCasa.objects.filter(Q(tipoCasa__tipo__contains = i) | Q(precio__contains = precio) | Q(ubicacion__contains = data['busqueda']) | Q(descripcion__contains = data['busqueda']) | Q(lugares_importantes__contains = data['busqueda']) | Q(owner__user__username__contains = data['busqueda']))
+                    for r in renta:
+                        informacion = {}
+                        imagenes = []
+                        informacion['tipoCasa'] = tipos_casa[r.tipoCasa.tipo]
+                        informacion['ubicacion'] = r.ubicacion
+                        informacion['precio'] = r.precio 
+                        informacion['fecha'] = r.fecha
+                        informacion['owner'] = r.owner
+                        informacion['id'] = int(r.id)
+                        for image in r.imagenesCasa.all():
+                            imagenes.append(image)
+                            informacion['imagenes'] = imagenes
+                        espacios_renta.append(informacion)
+                    return render(request, "post/index.html", {
+                        "posts": espacios_renta, 
+                        "profile_pic": UserInfo.objects.get(user = request.user).profile_pic
+                    })
+            else:
+                renta = RentarCasa.objects.filter(Q(precio__contains = precio) | Q(ubicacion__contains = data['busqueda']) | Q(descripcion__contains = data['busqueda']) | Q(lugares_importantes__contains = data['busqueda']) | Q(owner__user__username__contains = data['busqueda']))
+                for r in renta: 
+                    print(renta)
+                    informacion = {}
+                    imagenes = []
+                    informacion['tipoCasa'] = tipos_casa[r.tipoCasa.tipo]
+                    informacion['ubicacion'] = r.ubicacion
+                    informacion['precio'] = r.precio 
+                    informacion['fecha'] = r.fecha
+                    informacion['owner'] = r.owner
+                    informacion['id'] = int(r.id)
+                    for image in r.imagenesCasa.all():
+                        imagenes.append(image)
+                        informacion['imagenes'] = imagenes
+                    espacios_renta.append(informacion)
+                    return render(request, "post/index.html", {
+                        "posts": espacios_renta, 
+                        "profile_pic": UserInfo.objects.get(user = request.user).profile_pic
+                    })
+           
+        return redirect(reverse("index"))

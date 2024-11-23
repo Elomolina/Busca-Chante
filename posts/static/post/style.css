@@ -19,3 +19,7 @@ nav
 {
     color: white;
 }
+.userPicture
+{
+    border-radius: 20px;
+}

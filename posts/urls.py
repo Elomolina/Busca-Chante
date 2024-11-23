@@ -11,4 +11,8 @@ urlpatterns=[
     path('borrarBusqueda/', views.borrarBusqueda.as_view(), name = "borrarBusqueda"),
     path('actualizarRenta/', views.actualizarRenta.as_view(), name = "actualizarRenta"),
     path('actualizarBusqueda/', views.actualizarBusqueda.as_view(), name = "actualizarBusqueda"),
+    path('guardarPost/', views.guardarPost.as_view(), name = "guardarPost"),
+    path('misGuardados/', views.misGuardados.as_view(), name = "misGuardados"),
+    path('userProfile/', views.userProfile.as_view(), name = "userProfile"),
+    path('actualizarProfilePic/', views.actualizarProfilePic.as_view(), name = "actualizarProfilePic"),
 ]

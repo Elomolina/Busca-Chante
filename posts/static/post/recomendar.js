@@ -7,20 +7,25 @@ let buscarInfo = document.querySelectorAll(".buscarInfo")
 let buscarChanteButton = document.getElementById("buscarChanteButton")
 let contador = 0;
 let minmax_range = document.getElementById("minmax-range")
-minmax_range.addEventListener("input", (e) => {
-    let rangoh4 = document.getElementById("rangoh4")
-    let rango = parseInt(e.target.value)
-    rangoh4.innerHTML = `C$0 - C$ ${e.target.value}`;
-})
+if(minmax_range)
+{
+  minmax_range.addEventListener("input", (e) => {
+      let rangoh4 = document.getElementById("rangoh4")
+      let rango = parseInt(e.target.value)
+      rangoh4.innerHTML = `C$0 - C$ ${e.target.value}`;
+  })
+}
+if (buscarChanteButton)
+{
+  buscarChanteButton.addEventListener("click", actualizarDatos)
+}
 
-
-
-
-buscarChanteButton.addEventListener("click", actualizarDatos)
-
-editarBoton.addEventListener("click", () => {
-  desbloquearBoton()
-})
+if(editarBoton)
+{
+  editarBoton.addEventListener("click", () => {
+    desbloquearBoton()
+  })
+}
 
 buscarInfo.forEach((buscar) => {
   buscar.addEventListener("input", desbloquearBoton)
@@ -44,37 +49,40 @@ function desbloquearBoton()
       buscarChanteButton.disabled = true
     }
 }
-borrarBoton.addEventListener("click", () => {
-  let buscarID = document.getElementById("buscarID").value 
-  Swal.fire({
-    title: "¿Estás seguro que deseas borrar la búsqueda?",
-    text: "",
-    icon: "question",
-    confirmButtonText: "Borrar búsqueda"
-})
-.then((result) => {
-    if(result.isConfirmed)
-    {
-        fetch(`/borrarBusqueda/`, {
-            method: 'POST', 
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(buscarID)
-        })
-        .then(data => data.json())
-        .then((resultados) => {
-            window.location.href = "/buscarEspacio/"
-        })
-    }
-})
-})
+if(borrarBoton)
+{
+  borrarBoton.addEventListener("click", () => {
+    let buscarID = document.getElementById("buscarID").value 
+    Swal.fire({
+      title: "¿Estás seguro que deseas borrar la búsqueda?",
+      text: "",
+      icon: "question",
+      confirmButtonText: "Borrar búsqueda"
+  })
+  .then((result) => {
+      if(result.isConfirmed)
+      {
+          fetch(`/borrarBusqueda/`, {
+              method: 'POST', 
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(buscarID)
+          })
+          .then(data => data.json())
+          .then((resultados) => {
+              window.location.href = "/buscarEspacio/"
+          })
+      }
+  })
+  })
+}
 
 equis.forEach((equi) => {
   equi.addEventListener("click", borrarOferta)
 })
 checkboxOfertas.forEach((oferta) => 
-  {
+  {    
     oferta.addEventListener("change", enableButton)
   })
 
@@ -85,6 +93,7 @@ hacerOferta.addEventListener("click", () => {
 
 function ofertas()
 {
+  
   ofers = []
   checkboxOfertas.forEach((oferta) => 
   {

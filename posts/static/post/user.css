@@ -1,0 +1,117 @@
+#formPost 
+{
+    margin: 1em;
+    display: flex;
+    flex-direction: row;
+}
+.profilePic
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+#updatePic:hover 
+{
+    transform: scale(1.05);
+}
+#h3Perfil 
+{
+    margin-bottom: 1em;
+    font-size: 1.2rem;
+}
+.datos 
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    gap: 1.5em;
+}
+.input 
+{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+.input input[type="text"], .input input[type="number"]
+{
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid gainsboro;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
+}
+#username:disabled, #updatePic:disabled 
+{
+    cursor: not-allowed;
+    font-weight: bold;
+    color: #B03052;
+    background-color: gainsboro;
+}
+#actualizar
+{
+    margin-left: 1em;
+    margin-bottom: 1em;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.swal2-confirm
+{
+    background-color: #B03052 !important;
+    color: white;
+}
+#update, #updatePic
+{
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    width: 50%;
+    background-color: #B03052;
+    color: white;
+    padding: 1em;
+    transition: 0.2s;
+}
+#updatePic 
+{
+    margin-top: 1em;
+    width: 70%;
+    transition: 0.3s;
+}
+#update:disabled 
+{
+    background-color: grey;
+    cursor: pointer;
+}
+#update:hover 
+{
+    transform: scale(1.05);
+}
+.telefono 
+{
+    margin-top: 1em;
+    color: red;
+    font-size: 0.9rem;
+}
+#dropzone-file
+{
+    margin-bottom: 1em;
+    width: 80%;
+}
+#imagen 
+{
+    height: 300px;
+    width: 300px;
+    border-radius: 10px;
+}
+@media(max-width:600px)
+{
+    #formPost 
+    {
+        flex-direction: column;
+        gap: 1.5em;
+    }
+    #formPost div 
+    {
+        width: 100%;
+    }
+}

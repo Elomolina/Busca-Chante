@@ -1,34 +1,24 @@
-{% extends 'layout.html'%}
-{% block title %}
-Inicio
-{% endblock %}
+{% extends 'layout.html '%}
 {% load static %}
 {% block style %}
 <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{% static 'post/index.css'%}">
 {% endblock %}
 {% block main %}
-<form action="" id="search">
-    <input type="text" placeholder="Busca según ubicación, tipo de habitación, precio o usuario">
-</form>
-<h3 id="h3Espacios">Espacios en Renta</h3>
+<h2 id="misGuardados">Mis guardados</h2>
 <section class="postsRentar">
-{% for post in posts %}
-<div class="posts">
-    <input type="hidden" value="{{post.id}}">
-    {% if post.guardado %}
-    <img class="save" src="{% static 'post/save.png'%}">
-    {% else %}
-    <img class="save" src="{% static 'post/not_save.png'%}">
-    {% endif %}
+    {% for post in posts %}
+    <div class="posts">
+        <input type="hidden" value="{{post.id}}">
+        <img class="save" src="{% static 'post/save.png'%}">
         <div id="controls-carousel" class="relative w-full" data-carousel="static">
             <!-- Carousel wrapper -->
             <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-            {% for imagen in post.imagenes %}
+                {% for imagen in post.imagenes %}
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
                     <img src="{{imagen.imagen.url}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                 </div>
-            {% endfor %}
+                {% endfor %}
             </div>
             <!-- Slider controls -->
             <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
@@ -51,7 +41,7 @@ Inicio
         <div class="info">
             <a href="{% url 'espacio_detallado' post.id%}">
                 <h3>
-                  <span>Tipo de espacio: </span> {{post.tipoCasa}}
+                    <span>Tipo de espacio: </span> {{post.tipoCasa}}
                 </h3>
                 <p><span>Direccion:</span> {{post.ubicacion}}</p>
                 <p><span>Precio:</span> <b>{{post.precio}}C$</b></p>
@@ -60,13 +50,12 @@ Inicio
                 <p id="owner">{{post.owner.user}}</p>
             </a>
         </div>
-</div>
-{% endfor %}
-</section>
-<a href="{% url 'create_post' %}">
-    <img src="{% static 'post/mas.png'%}" alt="" srcset="" id="mas">
-</a>
+    </div>
+    {% empty %}
+    <h3 id="noGuardados">No has guardado ningún post todavía 🧐</h3>
+    {% endfor %}
+</section>  
 {% endblock %}
 {% block script %}
-<script src="{% static 'post/index.js'%}"></script>
+<script src="{% static 'post/index.js' %}"></script>
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
@@ -11,6 +12,9 @@ from authentication.models import *
 
 class Index(View):
     def get(self, request):
+        #crear sesion
+        if 'guardados' not in request.session:
+            request.session['guardados'] = []
         if not request.user.is_authenticated:
             return redirect(reverse("login"))
         posts = []
@@ -18,6 +22,9 @@ class Index(View):
         for i in casas_renta:
             informacion = {}
             imagenes = []
+            for guardado in request.session.get('guardados'):
+                if guardado['postID'] == i.id:
+                    informacion['guardado'] = guardado['guardado']
             informacion['tipoCasa'] = tipos_casa[i.tipoCasa.tipo]
             informacion['ubicacion'] = i.ubicacion
             informacion['precio'] = i.precio 
@@ -29,7 +36,8 @@ class Index(View):
             informacion['imagenes'] = imagenes
             posts.append(informacion)
         return render(request, "post/index.html", {
-            "posts": posts
+            "posts": posts, 
+            "profile_pic": UserInfo.objects.get(user = request.user).profile_pic
         })
 
 @method_decorator(csrf_exempt, name = 'dispatch')
@@ -46,7 +54,8 @@ class EspacioDetallado(View):
             "tipo_casa": tipo_casa,
             "imagenes": imagenes,
             "espacio_detallado": espacio_detallado,
-            "comentarios": comentarios
+            "comentarios": comentarios,
+            "profile_pic": UserInfo.objects.get(user = request.user).profile_pic
         })
     def post(self, request, id):
         data = json.loads(request.body)
@@ -94,7 +103,8 @@ class RecomendarEspacio(View):
             "busqueda": busqueda, 
             "tipo_casa": tipo_casa, 
             "ofertas": ofertas,
-            "espacios_disponibles": informacion_espacios
+            "espacios_disponibles": informacion_espacios,
+            "profile_pic": UserInfo.objects.get(user = request.user).profile_pic
         })
     def post(self, request, id):
         data = json.loads(request.body)
@@ -104,7 +114,6 @@ class RecomendarEspacio(View):
             postOferta = RentarCasa.objects.get(pk = i)
             oferta = ofertasBusqueda(post = post,postOferta = postOferta ,autor = autor)
             oferta.save()
-            print("oferta guardada")
         
         ofertas = ofertasBusqueda.objects.all()
         #ofertas = ofertasBusqueda()
@@ -135,7 +144,8 @@ class buscarEspacio(View):
             info['autor'] = i.autor
             busqueda.append(info)
         return render(request, "post/buscarRenta.html", {
-            "buscar_espacio": busqueda
+            "buscar_espacio": busqueda,
+            "profile_pic": UserInfo.objects.get(user = request.user).profile_pic
         })
 
 @method_decorator(csrf_exempt, name = 'dispatch')
@@ -159,7 +169,9 @@ class CrearPost(View):
     def get(self, request):
         if not request.user.is_authenticated:
             return redirect(reverse("login"))
-        return render(request, "post/create_post.html")
+        return render(request, "post/create_post.html", {
+            "profile_pic": UserInfo.objects.get(user = request.user).profile_pic
+        })
     def post(self, request):
         try:
             data = json.loads(request.POST.get('information'))
@@ -174,7 +186,6 @@ class CrearPost(View):
                     key = clave
                     break
             data['rangoPrecio'] = int(data['rangoPrecio'])
-            print(key)
             tipo_casa = TiposCasa.objects.get(tipo = key)
             user_info = UserInfo.objects.get(user = request.user)
             buscar_casa = BuscarCasa(tipoCasa = tipo_casa, rangoPrecio = data['rangoPrecio'], ubicacion = data['ubicacion'], descripcion = data['descripcion'], autor = user_info)
@@ -222,3 +233,77 @@ class actualizarBusqueda(View):
         tipo = TiposCasa.objects.get(tipo = key)
         actualizacion = BuscarCasa.objects.filter(pk = data['buscarID']).update(tipoCasa = tipo.id, rangoPrecio = int(data['precio']), ubicacion = data['ubicacion'], descripcion = data['descripcion'])
         return JsonResponse({"success": "Los datos han sido actualizados"})
+
+class misGuardados(View):
+    def get(self, request):
+        guardados = request.session.get('guardados')
+        posts_guardados = []
+        for i in guardados:
+            info = {}
+            imagenes = []
+            renta = RentarCasa.objects.get(pk = i['postID'])
+            info['tipoCasa'] = tipos_casa[renta.tipoCasa.tipo]
+            info['ubicacion'] = renta.ubicacion
+            info['precio'] = renta.precio
+            info['fecha'] = renta.fecha
+            info['owner'] = renta.owner 
+            info['id'] = int(renta.id)
+            for image in renta.imagenesCasa.all():
+                imagenes.append(image)
+            info['imagenes'] = imagenes
+            posts_guardados.append(info)
+        return render(request, "post/misGuardados.html", {
+            "posts": posts_guardados,
+            "profile_pic": UserInfo.objects.get(user = request.user).profile_pic
+        })
+
+@method_decorator(csrf_exempt, name = 'dispatch')   
+class guardarPost(View):
+    def post(self, request):
+        data = json.loads(request.body)
+        post = int(data['post'])
+        info = {
+            'guardado': data['saved'], 
+            'postID': post
+        }
+        #desguardar
+        if not data['saved']:
+            guardados = request.session.get('guardados')
+            for i in guardados:
+                if i['postID'] == post:
+                    guardados.remove(i)
+                    break
+            request.session['guardados'] = guardados
+        else:
+            request.session['guardados'] += [info]
+        if data['path'] == '/misGuardados/':
+            return JsonResponse({'recargar': 'True'})
+        return JsonResponse({"recargar": "false"})
+    
+@method_decorator(csrf_exempt, name = 'dispatch')
+class userProfile(View):
+    def get(self, request):
+        user_info = UserInfo.objects.get(user_id = request.user)
+        return render(request, "post/userProfile.html", {
+            "nombre": request.user.first_name, 
+            "apellido": request.user.last_name,
+            "telefono": user_info.phone_number,
+            "profile_pic": user_info.profile_pic,
+            "username": request.user.username
+        })
+    def post(self, request):
+        data = json.loads(request.POST.get('informacion'))
+        #actualizamos datos
+        user = User.objects.filter(username = data['username']).update(username = data['username'], first_name = data['nombre'], last_name = data['apellido'])
+        user_info = UserInfo.objects.filter(user = request.user).update(phone_number = int(data['telefono']))
+        return JsonResponse({"success": "Datos actualizados"})
+
+@method_decorator(csrf_exempt, name = 'dispatch')
+class actualizarProfilePic(View):
+    def post(self, request):
+        data = request.FILES.getlist('file')
+        for i in data:
+            user = UserInfo.objects.get(user = request.user)
+            user.profile_pic = i 
+            user.save()
+        return JsonResponse({"success": "Foto de perfil actualizada"})

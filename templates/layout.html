@@ -36,14 +36,15 @@
         {% endif %}
         <div class="nav-div">
             <img id="menu-logo" src="{% static 'authentication/menu.png'%}" alt="">
-            {% if not user.is_authenticated %}
+            {% if not user.is_authenticated%}
             <img id="user" src="{% static 'authentication/avatar-de-hombre.png'%}" alt="">
-            {% else %}
+            {% elif not profile_pic %}
             <div
                 class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                 <span class="font-medium text-gray-600 dark:text-gray-300">{{user.first_name|slice:":1"}}{{user.last_name|slice:":1"}}</span>
             </div>
-
+            {% else %}
+            <img id="user" class="userPicture" src="{{profile_pic.url}}" alt="">
             {% endif %}
         </div>
         <div class="popUp">
@@ -60,13 +61,13 @@
                 <a href="{% url 'create_post'%}">
                     Subir post
                 </a>
-                <a href="">
+                <a href="{% url 'userProfile' %}">
                     Cuenta
                 </a>
                 <a href="">
                     Calendario
                 </a>
-                <a href="">
+                <a href="{% url 'misGuardados'%}">
                     Mis guardados
                 </a>
                 <form action="{% url 'logOut' %}" method="post">

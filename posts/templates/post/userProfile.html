@@ -1,0 +1,52 @@
+{% extends 'layout.html '%}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'post/user.css'%}">
+<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+{% endblock %}
+{% block main %}
+<h1 id="actualizar">Actualiza tus datos {{username}} 😎</h1>
+<hr>
+<form action="" method="post" id="formPost">
+    <div class="profilePic">
+        {% if profile_pic %}
+        <h3 id="h3Perfil">Cambiar foto de perfil</h3>
+        {% else %}
+        <h3 id="h3Perfil">¡Agregar una foto de perfil!</h3>
+        {% endif %}
+        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="dropzone-file" type="file">
+        <img id="imagen" src="{{profile_pic.url}}">
+        {% if profile_pic %}
+        <input disabled type="submit" value="Actualizar foto de perfil" id="updatePic">
+        {% else %}
+        <input disabled type="submit" value="Agregar foto de perfil" id="updatePic">
+        {% endif %}
+    </div>
+    </div>
+    <div class="datos">
+        <div class="input">
+            <label for="">El username no se puede cambiar:</label>
+            <input disabled type="text" value="{{username}}" class="updateInfo" id="username">
+        </div>
+        <div class="input">
+            <label for="">Cambiar nombre:</label>
+            <input type="text" value="{{nombre}}" class="updateInfo" id="nombre">
+        </div>
+        <div class="input">
+            <label for="">Cambiar apellido:</label>
+            <input type="text" value="{{apellido}}" class="updateInfo" id="apellido">
+        </div>
+        <div class="input">
+            <label for="">Cambiar número de teléfono:</label>
+            <input type="number" value="{{telefono}}" id="numero_telefono" class="updateInfo">
+            <div class="telefono">
+
+            </div>
+        </div>
+        <input type="submit" value="Actualizar info" id="update">
+    </div>
+</form>
+{% endblock %}
+{% block script %}
+<script src="{% static 'post/user.js' %}"></script>
+{% endblock %}

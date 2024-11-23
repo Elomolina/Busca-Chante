@@ -64,12 +64,36 @@ span
     z-index: 1;
     width: 100%;
 }
-
+#noGuardados 
+{
+    width: 90vw;
+    color: grey;
+    text-align: center;
+}
 .posts 
 {
+    position: relative;
     margin-left: 1.5em;
     display: flex;
     flex-direction: column;
+}
+
+.swal2-confirm 
+{
+    background-color: #B03052;
+}
+.save 
+{
+    right: 10px;
+    z-index: 2;
+    top: 20px;
+    position: absolute;
+}
+#misGuardados 
+{
+    margin: 1em;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 .postsRentar
 {
